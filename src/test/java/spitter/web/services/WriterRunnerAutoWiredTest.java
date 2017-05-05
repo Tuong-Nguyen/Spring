@@ -15,7 +15,7 @@ import static org.mockito.Mockito.*;
  * Created by lnthao on 5/5/2017.
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes=WriterRunner.class)
+@ContextConfiguration(classes=WriterConfig.class)
 public class WriterRunnerAutoWiredTest {
     @Autowired
     private IWriter writer;
