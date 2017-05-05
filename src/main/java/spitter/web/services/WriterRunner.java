@@ -3,12 +3,12 @@ package spitter.web.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by lnthao on 5/4/2017.
  */
-@Configuration
-@ComponentScan
+@Component
 public class WriterRunner {
     private IWriter writer;
 
