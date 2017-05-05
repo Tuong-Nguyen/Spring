@@ -25,7 +25,7 @@ public class WriterRunnerAutoWiredTest {
 
     @Test
     public void writerShouldNotBeNull() {
-        assertNotNull(writerRunner.getWriter());
+        assertNotNull(writer);
     }
 
     @Test
