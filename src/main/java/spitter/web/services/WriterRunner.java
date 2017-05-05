@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
  * Created by lnthao on 5/4/2017.
  */
 @Service
-public class MySpringBeanWithDependency {
+public class WriterRunner {
     private IWriter writer;
 
     @Autowired
-    public MySpringBeanWithDependency(IWriter writer) {
+    public WriterRunner(IWriter writer) {
         this.writer = writer;
     }
 
