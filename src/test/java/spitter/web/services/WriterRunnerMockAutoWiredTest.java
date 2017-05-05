@@ -16,7 +16,7 @@ import static org.mockito.Mockito.verify;
  */
 public class WriterRunnerMockAutoWiredTest {
     @Mock
-    private Writer writer;
+    private IWriter writer;
 
     @InjectMocks
     private WriterRunner writerRunner;
@@ -34,11 +34,6 @@ public class WriterRunnerMockAutoWiredTest {
     @Test
     public void writerRunnerShouldNotBeNull() {
         assertNotNull(writerRunner);
-    }
-
-    @Test
-    public void writerRunner_getWriter_isInstanceOfWriter(){
-        Assert.assertTrue(writerRunner.getWriter() instanceof Writer);
     }
 
     @Test
