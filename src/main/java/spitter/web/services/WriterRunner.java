@@ -1,18 +1,24 @@
 package spitter.web.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 
 /**
  * Created by lnthao on 5/4/2017.
  */
-@Service
+@Configuration
+@ComponentScan
 public class WriterRunner {
     private IWriter writer;
 
     @Autowired
     public WriterRunner(IWriter writer) {
         this.writer = writer;
+    }
+
+    public IWriter getWriter() {
+        return this.writer;
     }
 
     public void run(){
