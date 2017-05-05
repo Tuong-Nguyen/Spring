@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class HomeController {
     @RequestMapping(value="/spitter/", method= RequestMethod.GET)
-    public String home(){
+    public String index(){
         return "home";
     }
 }
