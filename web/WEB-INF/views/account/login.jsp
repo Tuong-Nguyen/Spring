@@ -30,7 +30,7 @@
                         <table style="border: none">
                             <tr>
                                 <td style="width: 50%; align-content: center"><button type="submit" name="btnLogin" >Login</button></td>
-                                <td style="width: 50%; align-content: center"><button name="btnRegister" onclick="location.href='${urlRegister}'">Register</button></td>
+                                <td style="width: 50%; align-content: center"><button type="button" name="btnRegister" onclick="location.href='${urlRegister}'">Register</button></td>
                             </tr>
                         </table>
                     </td>

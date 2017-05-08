@@ -37,8 +37,8 @@ public class HomeController {
         if(session.getAttribute("user") != null) {
             welcome = session.getAttribute("user").toString();
         }
-            List<Course> coursesList = courseService.getCourses();
-            model.addAttribute("list", coursesList);
+        List<Course> coursesList = courseService.getCourses();
+        model.addAttribute("list", coursesList);
         model.addAttribute("welcome", welcome);
         return "home";
     }

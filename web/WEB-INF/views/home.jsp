@@ -14,7 +14,7 @@
 </head>
 <body>
 
-<h1>Welcome to Spittr</h1>
+<h1>Welcome to ${welcome}</h1>
 <a href="<c:url value="/login/" />">Login</a> |
 <a href="<c:url value="/register/" />">Register</a>
 
