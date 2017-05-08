@@ -1,9 +1,11 @@
 package spitter.web.controllers;
 
+import com.sun.webkit.Timer;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -12,6 +14,9 @@ import spitter.web.services.CourseService;
 
 import java.util.Arrays;
 import java.util.List;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by lnthao on 4/28/2017.
@@ -27,9 +32,14 @@ public class HomeController {
     CourseService courseService = new CourseService(list);
 
     @RequestMapping(value="/spitter/", method= RequestMethod.GET)
-    public String index(Model model){
-        List<Course> coursesList = courseService.getCourses();
-        model.addAttribute("list", coursesList);
+    public String index(Model model, HttpSession session){
+        String welcome = "Spitter";
+        if(session.getAttribute("user") != null) {
+            welcome = session.getAttribute("user").toString();
+        }
+            List<Course> coursesList = courseService.getCourses();
+            model.addAttribute("list", coursesList);
+        model.addAttribute("welcome", welcome);
         return "home";
     }
 
