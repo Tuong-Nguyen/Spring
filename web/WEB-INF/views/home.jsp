@@ -31,6 +31,6 @@
     </c:forEach>
 </table>
 <br/>
-<a href="courseForm">Add New Course</a>
+<a href="addCourse">Add New Course</a>
 </body>
 </html>

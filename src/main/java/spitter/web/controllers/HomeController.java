@@ -1,6 +1,7 @@
 package spitter.web.controllers;
 
 import com.sun.webkit.Timer;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -23,13 +24,8 @@ import javax.servlet.http.HttpSession;
  */
 @Controller
 public class HomeController {
-    List<Course> list = Arrays.asList(
-            new Course(1, "JavaScript", "JavaScript is a programming language used to make web pages interactive. "),
-            new Course(2, "HTML", "HTML is a computer language devised to allow website creation."),
-            new Course(3, "CSS", "CSS is a style language that defines layout of HTML documents. ")
-            );
-
-    CourseService courseService = new CourseService(list);
+    @Autowired
+    private CourseService courseService;
 
     @RequestMapping(value="/spitter/", method= RequestMethod.GET)
     public String index(Model model, HttpSession session){
@@ -45,7 +41,9 @@ public class HomeController {
 
     @RequestMapping(value="/spitter/addCourse", method = RequestMethod.GET)
     public String addCourse(Model model){
-            return "redirect:/spitter/";
+        Course cs = new Course();
+        model.addAttribute("courseForm", cs);
+        return "courseAddForm";
     }
 
     @RequestMapping(value="/spitter/editCourse/{id}", method = RequestMethod.GET)
@@ -56,14 +54,20 @@ public class HomeController {
     }
 
     @RequestMapping(value="/spitter/deleteCourse/{id}", method = RequestMethod.GET)
-    public String deleteCourse(@PathVariable("id") int id, Model model){
+    public String deleteCourse(@PathVariable("id") int id){
         courseService.deleteCourse(id);
         return "redirect:/spitter/";
     }
 
-    @RequestMapping(value="/save", method = RequestMethod.POST)
-    public String saveCourse(@ModelAttribute("courseForm") Course cs, Model model){
+    @RequestMapping(value="/editSave", method = RequestMethod.POST)
+    public String saveEditCourse(@ModelAttribute("courseForm") Course cs){
         courseService.updateCourse(cs);
+        return "redirect:/spitter/";
+    }
+
+    @RequestMapping(value="/save", method = RequestMethod.POST)
+    public String save(@ModelAttribute("courseForm") Course cs, Model model){
+        courseService.addCourse(cs);
         return "redirect:/spitter/";
     }
 }
