@@ -34,7 +34,7 @@ public class WriteRunnerWithNiceWriterTest {
         Assert.assertEquals(writer.getClass(), NiceWriter.class);
     }
     @Test
-    public void WriterRunnerGetIWriter_IWriter(){
+    public void WriterRunnerGetIWriter_IsNiceIWriter(){
         Assert.assertEquals(runner.getWriter().getClass(), NiceWriter.class);
     }
 }
