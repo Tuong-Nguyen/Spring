@@ -35,6 +35,6 @@ public class WriteRunnerWithWriterTest {
     }
     @Test
     public void WriterRunnerGetIWriter_IsIWriter(){
-        Assert.assertEquals(runner.getWriter().getClass(), Writer.class);
+        Assert.assertEquals(runner.getWriter().getClass(), writer.getClass());
     }
 }
