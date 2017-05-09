@@ -1,6 +1,6 @@
-package spitter.web.models;
+package spitter.web.services;
 
-import spitter.web.models.Interfaces.IWriter;
+import spitter.web.services.Interfaces.IWriter;
 
 /**
  * Created by nttao on 5/9/2017.

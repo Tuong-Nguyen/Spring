@@ -1,4 +1,4 @@
-package spitter.web.models.Interfaces;
+package spitter.web.services.Interfaces;
 
 /**
  * Created by nttao on 5/9/2017.
