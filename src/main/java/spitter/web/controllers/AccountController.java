@@ -14,7 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Created by nttao on 5/4/2017.
@@ -35,7 +38,9 @@ public class AccountController {
     @RequestMapping(value = "/register/", method = RequestMethod.GET)
     public ModelAndView RegisterPage(Model model) {
         ModelAndView view = new ModelAndView("account/register");
+        List<String> sex = new LinkedList<String>(Arrays.asList(new String[]{"Male", "FeMale"}));
         AccountModel ac = new AccountModel();
+        model.addAttribute("sex", sex);
         model.addAttribute("account", ac);
         return view;
     }

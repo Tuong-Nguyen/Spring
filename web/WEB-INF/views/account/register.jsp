@@ -43,9 +43,6 @@
                                     <option value="${i}">${i}</option>
                                 </c:forEach>
                             </select></td>
-                            <%
-
-                            %>
                             <td style="width: 25%;"><select style="width: 40px;" type="text" name="month">
                                 <c:forEach var = "i" begin="1" end="12">
                                     <option value="${i}">${i}</option>
@@ -60,6 +57,10 @@
             <tr>
                 <td style="width:150px"><label>Email:</label></td>
                 <td style="width:250px"><form:input path="strEmail" type="email" name="strEmail" /></td>
+            </tr>
+            <tr>
+                <td style="width:150px"><label>Sex:</label></td>
+                <td style="width:250px"><form:radiobuttons path="strSex" items="${sex}" /></td>
             </tr>
             <tr>
                 <td colspan="2">
