@@ -13,6 +13,7 @@ import java.util.List;
 @Service
 public class CourseService {
     private List<Course> coursesList;
+
     public CourseService() {
         coursesList = new ArrayList<Course>();
         coursesList.add( new Course(1, "JavaScript", "JavaScript is a programming language used to make web pages interactive. "));
