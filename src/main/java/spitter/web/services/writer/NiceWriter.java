@@ -1,5 +1,6 @@
 package spitter.web.services.writer;
 
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 /**
