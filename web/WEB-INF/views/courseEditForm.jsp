@@ -14,7 +14,7 @@
 </head>
 <body>
     <h1>Edit Course</h1>
-    <form:form method="post" modelAttribute="courseForm" action="/save">
+    <form:form method="post" modelAttribute="courseForm" action="/editSave">
         <table >
             <tr>
                 <td></td>

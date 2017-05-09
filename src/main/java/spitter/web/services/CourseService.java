@@ -1,21 +1,23 @@
 package spitter.web.services;
 
+import org.springframework.stereotype.Service;
 import spitter.web.models.Course;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
  * Created by nkim on 5/5/2017.
  */
+@Service
 public class CourseService {
-    List<Course> coursesList;
-
-    public CourseService(List<Course> list) {
-        this.coursesList = list;
-    }
-
-    public void setCourses(List<Course> list){
-        this.coursesList = list;
+    private List<Course> coursesList;
+    public CourseService() {
+        coursesList = new ArrayList<Course>();
+        coursesList.add( new Course(1, "JavaScript", "JavaScript is a programming language used to make web pages interactive. "));
+        coursesList.add( new Course(2, "HTML", "HTML is a computer language devised to allow website creation."));
+        coursesList.add( new Course(3, "CSS", "CSS is a style language that defines layout of HTML documents. "));
     }
 
     public List<Course> getCourses(){
@@ -33,7 +35,8 @@ public class CourseService {
     }
 
     public void deleteCourse(int id){
-        coursesList.remove(getCourseById(id));
+        Course deletingCourse = getCourseById(id);
+        coursesList.remove(deletingCourse);
     }
 
     public Course getCourseById(int id){
@@ -48,3 +51,4 @@ public class CourseService {
 
     }
 }
+
