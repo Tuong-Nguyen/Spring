@@ -17,7 +17,7 @@ import spitter.web.services.writer.WriterRunner;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {WriterTestConfig.class})
-public class UnitTestWriterRunner {
+public class UnitTestWriterRunnerWithWriter {
     @Autowired
     private WriterRunner writerRunner;
 
@@ -25,20 +25,22 @@ public class UnitTestWriterRunner {
     private IWriter iwriter;
 
     @Test
-    public void IWriterNotNull(){
-        Assert.assertNotNull(iwriter);
-    }
-    @Test
-    public void checkIWriter_isInstanceWriter(){
-        Assert.assertTrue(iwriter instanceof Writer);
-    }
-    @Test
     public void getWriterRunnerObject_ReturnObject(){
         Assert.assertNotNull(writerRunner.getWriter());
     }
 
     @Test
-    public void GetWriterMethod_sameIWriter(){
+    public void IWriterNotNull(){
+        Assert.assertNotNull(iwriter);
+    }
+
+    @Test
+    public void checkIWriter_isInstanceWriter(){
+        Assert.assertTrue(iwriter instanceof Writer);
+    }
+
+    @Test
+    public void GetWriterMethod_returnIWriter(){
         Assert.assertEquals(writerRunner.getWriter(), iwriter);
     }
 
@@ -46,6 +48,5 @@ public class UnitTestWriterRunner {
     public void getWriter_ReturnWriterObject(){
         Assert.assertTrue(writerRunner.getWriter() instanceof Writer);
     }
-
 
 }

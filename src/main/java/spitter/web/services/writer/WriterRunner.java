@@ -11,7 +11,7 @@ import spitter.web.services.writer.IWriter;
 /**
  * Created by nkim on 5/9/2017.
  */
-@Component
+
 public class WriterRunner {
     private IWriter writer;
 
