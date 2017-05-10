@@ -14,12 +14,16 @@ import spitter.web.services.Interfaces.IWriter;
  */
 @Service
 public class WriterRunner {
+    @Autowired
     private IWriter writer;
 
-    @Autowired
-    public void setWriter(IWriter writer) {
+    public WriterRunner(IWriter writer){
         this.writer = writer;
     }
+//    @Autowired
+//    public void setWriter(IWriter writer) {
+//        this.writer = writer;
+//    }
     public IWriter getWriter(){
         return this.writer;
     }

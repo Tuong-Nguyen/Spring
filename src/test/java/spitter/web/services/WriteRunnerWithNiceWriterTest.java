@@ -22,19 +22,19 @@ public class WriteRunnerWithNiceWriterTest {
     private IWriter writer;
 
     @Test
-    public void Initialize_WritterRunner_Success(){
+    public void initialize_WritterRunner_Success(){
         Assert.assertNotNull(runner);
     }
     @Test
-    public void  Initialize_IWriter_Success(){
+    public void  initialize_IWriter_Success(){
         Assert.assertNotNull(writer);
     }
     @Test
-    public void Initialize_IWriter_IsNiceWriter(){
+    public void initialize_IWriter_IsNiceWriter(){
         Assert.assertEquals(writer.getClass(), NiceWriter.class);
     }
     @Test
-    public void WriterRunnerGetIWriter_IsNiceIWriter(){
+    public void getWriter_WriterRunner_IsWriter(){
         Assert.assertEquals(runner.getWriter().getClass(), writer.getClass());
     }
 }

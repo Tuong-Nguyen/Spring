@@ -3,6 +3,7 @@ package spitter.web.services;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
@@ -22,19 +23,19 @@ public class WriteRunnerWithWriterTest {
     private IWriter writer;
 
     @Test
-    public void Initialize_WritterRunner_Success(){
+    public void initialize_WritterRunner_Success(){
         Assert.assertNotNull(runner);
     }
     @Test
-    public void  Initialize_IWriter_Success(){
+    public void  initialize_IWriter_Success(){
         Assert.assertNotNull(writer);
     }
     @Test
-    public void Initialize_IWriter_IsWriter(){
+    public void initialize_IWriter_IsWriter(){
         Assert.assertEquals(writer.getClass(), Writer.class);
     }
     @Test
-    public void WriterRunnerGetIWriter_IsIWriter(){
+    public void getWriter_WriterRunner_IsWriter(){
         Assert.assertEquals(runner.getWriter().getClass(), writer.getClass());
     }
 }
