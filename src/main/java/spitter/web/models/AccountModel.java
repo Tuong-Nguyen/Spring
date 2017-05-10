@@ -11,6 +11,11 @@ public class AccountModel {
     private String strName;
     private String strEmail;
     private Date dBirthDay;
+    private String strSex;
+
+    public String getStrSex() { return strSex; }
+
+    public void setStrSex(String strSex) {  this.strSex = strSex; }
 
     public String getStrID() {
         return strID;
