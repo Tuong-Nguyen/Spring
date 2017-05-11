@@ -13,6 +13,7 @@ import org.springframework.web.servlet.ModelAndView;
 import spitter.web.models.Course;
 import spitter.web.services.CourseService;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import org.springframework.web.servlet.ModelAndView;
@@ -62,6 +63,7 @@ public class HomeController {
     @RequestMapping(value="/editSave", method = RequestMethod.POST)
     public String saveEditCourse(@ModelAttribute("courseForm") Course cs){
         courseService.updateCourse(cs);
+        System.out.println("Save Course");
         return "redirect:/spitter/";
     }
 

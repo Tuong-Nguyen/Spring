@@ -20,11 +20,15 @@
 
 <h1>Courses</h1>
 <table border="2" width="70%" cellpadding="2">
-    <tr><th>Title</th><th>Description</th><th>Edit</th><th>Delete</th></tr>
+    <tr><th>Title</th><th>Description</th><th>Start Date</th><th>End Date</th><th>Pax</th><th>Active</th><th>Edit</th><th>Delete</th></tr>
     <c:forEach var="item" items="${list}">
         <tr>
             <td>${item.title}</td>
             <td>${item.description}</td>
+            <td>${item.startDate}</td>
+            <td>${item.endDate}</td>
+            <td>${item.pax}</td>
+            <td>${(item.active == true? "Yes": "No")}</td>
             <td><a href="editCourse/${item.id}">Edit</a> </td>
             <td><a href="deleteCourse/${item.id}">Delete</a> </td>
         </tr>
