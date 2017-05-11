@@ -8,15 +8,25 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="C" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
     <title>Welcome to Spitter</title>
 </head>
 <body>
-
-<h1>Welcome to ${welcome}</h1>
-<a href="<c:url value="/login/" />">Login</a> |
-<a href="<c:url value="/register/" />">Register</a>
+<c:choose>
+    <c:when test="${account.strID == null}">
+        <h1>Welcome to Spitter!</h1>
+        <label><a href="<c:url value="/login/" />">Login</a></label> |
+        <label><a href="<c:url value="/register/" />">Register</a></label>
+    </c:when>
+    <c:when test="${account.strID != null}">
+        <h1>Welcome <a href="<c:url value="/profile/" />">${account.strName}</a></h1>
+        <label><a href="<c:url value="/logout/" />">Logout</a></label> |
+        <label><a href="<c:url value="/register/" />">Register</a></label>
+    </c:when>
+</c:choose>
 
 <h1>Courses</h1>
 <table border="2" width="70%" cellpadding="2">

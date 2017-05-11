@@ -1,21 +1,24 @@
 package spitter.web.models;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
 
 /**
  * Created by nttao on 5/5/2017.
  */
+@Component
 public class AccountModel {
     private String strID;
     private String strPass;
     private String strName;
     private String strEmail;
     private Date dBirthDay;
-    private String strSex;
+    private String strGender;
 
-    public String getStrSex() { return strSex; }
+    public String getStrGender() { return strGender; }
 
-    public void setStrSex(String strSex) {  this.strSex = strSex; }
+    public void setStrGender(String strGender) {  this.strGender = strGender; }
 
     public String getStrID() {
         return strID;

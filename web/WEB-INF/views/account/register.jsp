@@ -59,8 +59,8 @@
                 <td style="width:250px"><form:input path="strEmail" type="email" name="strEmail" /></td>
             </tr>
             <tr>
-                <td style="width:150px"><label>Sex:</label></td>
-                <td style="width:250px"><form:radiobuttons path="strSex" items="${sex}" /></td>
+                <td style="width:150px"><label>Gender:</label></td>
+                <td style="width:250px"><form:radiobuttons path="strGender" items="${gender}" /></td>
             </tr>
             <tr>
                 <td colspan="2">
