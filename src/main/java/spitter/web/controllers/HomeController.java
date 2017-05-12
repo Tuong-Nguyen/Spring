@@ -27,9 +27,16 @@ public class HomeController {
     private CourseService courseService;
 
     @RequestMapping(value="/spitter/", method= RequestMethod.GET)
-    public String index(@ModelAttribute("account") AccountModel account, Model model){
+    public String index(@ModelAttribute("account") AccountModel account, Model model, HttpSession session){
+        boolean isLogin = false;
+        if(session.getAttribute("account") != null){
+            account = (AccountModel)session.getAttribute("account");
+            model.addAttribute("user", account.getStrName());
+            isLogin = true;
+        }
         List<Course> coursesList = courseService.getCourses();
         model.addAttribute("list", coursesList);
+        model.addAttribute("isLogin", isLogin);
         return "home";
     }
 

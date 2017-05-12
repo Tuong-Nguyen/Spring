@@ -26,6 +26,7 @@ public class AccountService {
         AccountModel account = new AccountModel();
         account.setStrID("qwe");
         account.setStrPass("qwe");
+        account.setStrName("asd");
         account.setStrEmail("qwe@qwe.com");
         users.add(account);
     }
@@ -60,12 +61,25 @@ public class AccountService {
         return false;
     }
 
-    public AccountModel getUser(String id){
+    public AccountModel getUserProfile(String id){
         for (AccountModel user : users) {
             if (user.getStrID().equals(id)) {
                 return user;
             }
         }
         return null;
+    }
+
+    public boolean updateUserProfile(AccountModel account){
+        for (AccountModel user : users) {
+            if (user.getStrID().equals(account.getStrID())) {
+                user.setStrName(account.getStrName());
+                user.setdBirthDay(account.getdBirthDay());
+                user.setStrGender(account.getStrGender());
+                user.setStrPass(account.getStrPass());
+                return true;
+            }
+        }
+        return false;
     }
 }

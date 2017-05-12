@@ -40,17 +40,10 @@ public class AccountController {
         return gender;
     }
 
-
     @RequestMapping(value = "/login/", method = RequestMethod.GET)
     public ModelAndView LoginPage(Model model) {
         ModelAndView view = new ModelAndView("account/login");
         return view;
-    }
-
-    @RequestMapping(value = "/logout/", method = RequestMethod.GET)
-    public String logout(Model model,SessionStatus session) {
-        session.setComplete();
-        return "redirect:../spitter/";
     }
 
     @RequestMapping(value = "/register/", method = RequestMethod.GET)
@@ -60,13 +53,20 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/login/", method = RequestMethod.POST)
-    public String login(@ModelAttribute("account") AccountModel account) {
-        ModelAndView view = new ModelAndView();
+    public String login(@ModelAttribute("account") AccountModel account, HttpSession session) {
         if (service.login(account)) {
+            session.setAttribute("account", account);
             return "redirect: /spitter/";
         } else {
             return "/account/login";
         }
+    }
+
+    @RequestMapping(value = "/logout/", method = RequestMethod.GET)
+    public String logout(Model model,SessionStatus status, HttpSession session) {
+        session.removeAttribute("account");
+        status.setComplete();
+        return "redirect:../spitter/";
     }
 
     @RequestMapping(value = "/register/", method = RequestMethod.POST)
@@ -92,6 +92,27 @@ public class AccountController {
 
     @RequestMapping(value = "/profile/", method = RequestMethod.GET)
     public String getUserProfile(@ModelAttribute("account") AccountModel account){
+        return "account/userprofile";
+    }
+
+    @RequestMapping(value = "/updateprofile/", method = RequestMethod.POST)
+    public String updateProfile(@ModelAttribute("account") AccountModel account, HttpServletRequest request, HttpSession session, SessionStatus status){
+        boolean isPWChange = false;
+        String strCurrentPass = request.getParameter("strCurrentPass");
+        String strNewPass = request.getParameter("strNewPass");
+        String strRetypeNewPass = request.getParameter("strRetypeNewPass");
+        if(strCurrentPass.equals(account.getStrPass()) && strNewPass.equals(strRetypeNewPass)) {
+            account.setStrPass(strNewPass);
+            isPWChange = true;
+        }
+        if(service.updateUserProfile(account) == true){
+            if(isPWChange){
+                session.removeAttribute("account");
+                status.setComplete();
+                return "redirect: /login/";
+            }
+            return "account/userprofile";
+        }
         return "account/userprofile";
     }
 }

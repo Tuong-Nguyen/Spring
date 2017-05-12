@@ -31,36 +31,62 @@
             document.getElementById("selectDate").removeAttribute("disabled");
             document.getElementById("selectMonth").removeAttribute("disabled");
             document.getElementById("selectYear").removeAttribute("disabled");
-            document.getElementById("rdGender").removeAttribute("disabled");
+            document.getElementById("rdGender1").removeAttribute("disabled");
+            document.getElementById("rdGender2").removeAttribute("disabled");
+            document.getElementById("btnEnableEdit").setAttribute("onclick", "cancelEdit()");
+            document.getElementById("btnEnableEdit").innerHTML = "Cancel";
         };
         function cancelEdit() {
-            document.getElementById('txtName').setAttribute("disabled");
-            document.getElementById("selectDate").setAttribute("disabled");
-            document.getElementById("selectMonth").setAttribute("disabled");
-            document.getElementById("selectYear").setAttribute("disabled");
-            document.getElementById("rdGender").setAttribute("disabled");
+            document.getElementById('txtName').setAttribute("disabled", "true");
+            document.getElementById("selectDate").setAttribute("disabled", "true");
+            document.getElementById("selectMonth").setAttribute("disabled", "true");
+            document.getElementById("selectYear").setAttribute("disabled", "true");
+            document.getElementById("rdGender1").setAttribute("disabled", "true");
+            document.getElementById("rdGender2").setAttribute("disabled", "true");
+            document.getElementById("btnEnableEdit").setAttribute("onclick", "enableEdit()");
+            document.getElementById("btnEnableEdit").innerHTML = "Edit";
         };
 
     </script>
 </head>
 <body>
-    <form:form action="" method="PUT" modelAttribute="account">
-        <table>
+    <form:form action="/updateprofile/" method="put" modelAttribute="account">
+    <div style="align-content: center">
+        <table style="width: 510px">
             <thead>
-                <tr>Your Profile</tr>
+                <tr><h3>Password Change</h3></tr>
             </thead>
             <tbody>
                 <tr>
-                    <td style="width: 30%"><label>Name: </label></td>
-                    <td style="width: 70%"><form:input id="txtName" path="strName" disabled="true"></form:input></td>
+                    <td style="width: 120px"><label>Current pass: </label></td>
+                    <td style="width: 380px"><input id="txtCurrentPass" type="password" name="strCurrentPass" ></input></td>
                 </tr>
                 <tr>
-                    <td style="width: 30%"><label>Email: </label></td>
-                    <td style="width: 70%"><form:input path="strEmail" disabled="true"></form:input></td>
+                    <td style="width: 120px"><label>New pass: </label></td>
+                    <td style="width: 380px"><input id="txtNewPass" type="password" name="strNewPass" ></input></td>
                 </tr>
                 <tr>
-                    <td style="width:150px"><label>Birthday:</label></td>
-                    <td style="width:250px">
+                    <td style="width: 120px"><label>Retype new pass: </label></td>
+                    <td style="width: 380px"><input id="txtRetypeNewPass" type="password" name="strRetypeNewPass" ></input></td>
+                </tr>
+            </tbody>
+        </table>
+        <table style="width: 510px">
+            <thead>
+                <tr><h3>Profile</h3></tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="width: 120px"><label>Name: </label></td>
+                    <td style="width: 380px"><form:input id="txtName" path="strName" disabled="true" ></form:input></td>
+                </tr>
+                <tr>
+                    <td style="width: 120px"><label>Email: </label></td>
+                    <td style="width: 380px"><form:input path="strEmail" disabled="true"></form:input></td>
+                </tr>
+                <tr>
+                    <td style="width:120px"><label>Birthday:</label></td>
+                    <td style="width:380px">
                         <table style="border: none; padding:0px; margin: 0px;">
                             <tr style="width: 100%; padding:0px; margin: 0px;">
                                 <td style="width: 25%;"><select id="selectDate" disabled style="width: 40px;" type="text" name="date">
@@ -80,17 +106,18 @@
                     </td>
                 </tr>
                 <tr>
-                    <td style="width: 30%"><label>Gender: </label></td>
-                    <td style="width: 70%"><form:radiobuttons  id="rdGender" disabled="true" path="strGender" items="${gender}" /></td>
+                    <td style="width: 120px"><label>Gender: </label></td>
+                    <td style="width: 380px"><form:radiobuttons  id="rdGender" disabled="true" path="strGender" items="${gender}" /></td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td><button type="button" onclick="enableEdit()" >Edit</button></td>
-                    <td><button type="button" >Save</button></td>
+                    <td style="align-content: center"><button id="btnEnableEdit" type="button" onclick="enableEdit()" >Edit</button></td>
+                    <td style="align-content: center"><button type="submit" >Save</button></td>
                 </tr>
             </tfoot>
         </table>
+    </div>
     </form:form>
 </body>
 </html>
