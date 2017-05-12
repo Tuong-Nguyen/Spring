@@ -24,11 +24,12 @@ import javax.servlet.http.HttpSession;
  * Created by lnthao on 4/28/2017.
  */
 @Controller
+@RequestMapping("/courses")
 public class HomeController {
     @Autowired
     private CourseService courseService;
 
-    @RequestMapping(value="/spitter/", method= RequestMethod.GET)
+    @RequestMapping(value="", method= RequestMethod.GET)
     public String index(Model model, HttpSession session){
         String welcome = "Spitter";
         if(session.getAttribute("user") != null) {
@@ -40,36 +41,42 @@ public class HomeController {
         return "home";
     }
 
-    @RequestMapping(value="/spitter/addCourse", method = RequestMethod.GET)
-    public String addCourse(Model model){
+    @RequestMapping(value="/{id}/get", method = RequestMethod.GET)
+    public String show(@PathVariable("id") int id, Model model){
+        Course cs = courseService.getCourseById(id);
+        model.addAttribute("courseForm", cs);
+        return "detailCourse";
+    }
+
+    @RequestMapping(value="/create", method = RequestMethod.GET)
+    public String create(Model model){
         Course cs = new Course();
         model.addAttribute("courseForm", cs);
         return "courseAddForm";
     }
 
-    @RequestMapping(value="/spitter/editCourse/{id}", method = RequestMethod.GET)
-    public String showCourseEditForm(@PathVariable("id") int id, Model model){
+    @RequestMapping(value="/{id}/edit", method = RequestMethod.GET)
+    public String edit(@PathVariable("id") int id, Model model){
         Course cs = courseService.getCourseById(id);
         model.addAttribute("courseForm", cs);
         return "courseEditForm";
     }
 
-    @RequestMapping(value="/spitter/deleteCourse/{id}", method = RequestMethod.GET)
-    public String deleteCourse(@PathVariable("id") int id){
+    @RequestMapping(value="/{id}/delete", method = RequestMethod.GET)
+    public String destroy(@PathVariable("id") int id){
         courseService.deleteCourse(id);
-        return "redirect:/spitter/";
+        return "redirect:/courses";
     }
 
-    @RequestMapping(value="/editSave", method = RequestMethod.POST)
-    public String saveEditCourse(@ModelAttribute("courseForm") Course cs){
+    @RequestMapping(value="/update", method = RequestMethod.POST)
+    public String update(@ModelAttribute("courseForm") Course cs){
         courseService.updateCourse(cs);
-        System.out.println("Save Course");
-        return "redirect:/spitter/";
+        return "redirect:/courses";
     }
 
-    @RequestMapping(value="/save", method = RequestMethod.POST)
-    public String save(@ModelAttribute("courseForm") Course cs, Model model){
+    @RequestMapping(value="", method = RequestMethod.POST)
+    public String store(@ModelAttribute("courseForm") Course cs){
         courseService.addCourse(cs);
-        return "redirect:/spitter/";
+        return "redirect:/courses";
     }
 }

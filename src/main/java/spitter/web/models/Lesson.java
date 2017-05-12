@@ -11,7 +11,7 @@ public class Lesson {
     public Lesson(){
 
     }
-    public Lesson(int id, String title, int tiem){
+    public Lesson(int id, String title, int time){
         this.id = id;
         this.title = title;
         this.time = time;
