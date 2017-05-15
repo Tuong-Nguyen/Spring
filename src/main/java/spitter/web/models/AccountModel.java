@@ -1,10 +1,12 @@
 package spitter.web.models;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 
 /**
  * Created by nttao on 5/5/2017.
  */
+@XmlRootElement(name="user")
 public class AccountModel {
     private String strID;
     private String strPass;

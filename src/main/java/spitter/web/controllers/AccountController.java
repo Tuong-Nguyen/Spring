@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import spitter.web.models.AccountModel;
 import spitter.web.services.AccountService;
 
@@ -22,6 +23,7 @@ import java.util.List;
 /**
  * Created by nttao on 5/4/2017.
  */
+
 @Controller
 public class AccountController {
     @Autowired
@@ -76,5 +78,12 @@ public class AccountController {
             view.setViewName("account/register");
             return view;
         }
+    }
+
+    @RequestMapping(value = "/users/find/{id}", method = RequestMethod.GET)
+    public @ResponseBody AccountModel find(@PathVariable("id") String id){
+        AccountModel acc = service.getAccount(id);
+        return acc;
+
     }
 }

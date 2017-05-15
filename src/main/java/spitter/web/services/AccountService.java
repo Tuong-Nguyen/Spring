@@ -19,6 +19,11 @@ public class AccountService {
     private List<AccountModel> users;
     public AccountService(){
         users = new ArrayList<>();
+        AccountModel acc = new AccountModel();
+        acc.setStrID("1");
+        acc.setStrName("lnthao");
+        acc.setStrPass("lnthao");
+        users.add(acc);
     }
 
     public Boolean login(AccountModel account) {
@@ -61,5 +66,9 @@ public class AccountService {
     }
     private void writeListUserFromFile(){
         JSONObject jsonObj = new JSONObject();
+    }
+
+    public AccountModel getAccount(String id) {
+        return users.stream().filter(acc -> acc.getStrID().equals(id)).findFirst().get();
     }
 }
