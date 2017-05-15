@@ -6,6 +6,8 @@ import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import spitter.web.models.AccountModel;
+import spitter.web.models.Course;
+import spitter.web.models.CourseRegister;
 
 import java.io.FileReader;
 import java.text.DateFormat;
@@ -21,6 +23,7 @@ import java.util.Objects;
 @Component
 public class AccountService {
     private List<AccountModel> users;
+    private List<CourseRegister> courseRegisters;
     public AccountService(){
         users = new ArrayList<>();
         AccountModel account = new AccountModel();
@@ -29,6 +32,13 @@ public class AccountService {
         account.setStrName("asd");
         account.setStrEmail("qwe@qwe.com");
         users.add(account);
+        courseRegisters = new ArrayList<CourseRegister>();
+        courseRegisters.add(new CourseRegister(account,new Course(1, "JavaScript", "JavaScript is a programming language used to make web pages interactive. ")));
+        courseRegisters.add(new CourseRegister(account, new Course(2, "HTML", "HTML is a computer language devised to allow website creation.")));
+        courseRegisters.add(new CourseRegister(account, new Course(3, "JQuery", "JQuery is a programming language used to make web pages interactive")));
+        courseRegisters.add(new CourseRegister(account, new Course(4, "CSS", "CSS is a computer language devised to allow website creation.")));
+        courseRegisters.get(0).setApproved(true);
+        courseRegisters.get(3).setApproved(true);
     }
 
     public Boolean login(AccountModel account) {
@@ -81,5 +91,38 @@ public class AccountService {
             }
         }
         return false;
+    }
+
+    public List<CourseRegister> getUserCourseRegister(AccountModel user){
+        List<CourseRegister> userCourse = new ArrayList<CourseRegister>();
+        for (CourseRegister cr: courseRegisters) {
+            if(cr.getUser().getStrID().equals(user.getStrID()))
+            {
+                userCourse.add(cr);
+            }
+        }
+        return userCourse;
+    }
+
+    public List<CourseRegister> getUserCourseIsApprove(AccountModel user){
+        List<CourseRegister> userCourse = new ArrayList<CourseRegister>();
+        for (CourseRegister cr: courseRegisters) {
+            if(cr.getUser().getStrID().equals(user.getStrID())&& cr.isApproved())
+            {
+                userCourse.add(cr);
+            }
+        }
+        return userCourse;
+    }
+
+    public List<CourseRegister> getUserCourseWaitApprove(AccountModel user){
+        List<CourseRegister> userCourse = new ArrayList<CourseRegister>();
+        for (CourseRegister cr: courseRegisters) {
+            if(cr.getUser().getStrID().equals(user.getStrID()) && !cr.isApproved())
+            {
+                userCourse.add(cr);
+            }
+        }
+        return userCourse;
     }
 }

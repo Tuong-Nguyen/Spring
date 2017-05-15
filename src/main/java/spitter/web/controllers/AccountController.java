@@ -1,5 +1,6 @@
 package spitter.web.controllers;
 
+import com.sun.tracing.dtrace.ModuleAttributes;
 import jdk.nashorn.internal.ir.IfNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpRequest;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import spitter.web.models.AccountModel;
+import spitter.web.models.CourseRegister;
 import spitter.web.services.AccountService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -41,15 +43,13 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/login/", method = RequestMethod.GET)
-    public ModelAndView LoginPage(Model model) {
-        ModelAndView view = new ModelAndView("account/login");
-        return view;
+    public String LoginPage(Model model) {
+        return "account/login";
     }
 
     @RequestMapping(value = "/register/", method = RequestMethod.GET)
-    public ModelAndView RegisterPage(Model model) {
-        ModelAndView view = new ModelAndView("account/register");
-        return view;
+    public String RegisterPage(Model model) {
+        return "account/register";
     }
 
     @RequestMapping(value = "/login/", method = RequestMethod.POST)
@@ -70,32 +70,32 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/register/", method = RequestMethod.POST)
-    public ModelAndView register(@ModelAttribute("account") AccountModel account, HttpServletRequest request, SessionStatus status) {
+    public String register(@ModelAttribute("account") AccountModel account, HttpServletRequest request, SessionStatus status) {
         String strbirhtDay = request.getParameter("date") + "/" + request.getParameter("month") + "/" + request.getParameter("year");
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
-        ModelAndView view = new ModelAndView();
         try {
             Date date = (Date) df.parse(strbirhtDay);
             account.setdBirthDay(date);
             if (service.register(account)) {
-                view.setViewName("redirect: /login/");
+                status.setComplete();
+                return "redirect: /login/";
             } else {
-                view.setViewName("account/register");
+                return "account/register";
             }
-            status.setComplete();
-            return view;
         } catch (Exception ex) {
-            view.setViewName("account/register");
-            return view;
+            return "account/register";
         }
     }
 
-    @RequestMapping(value = "/profile/", method = RequestMethod.GET)
-    public String getUserProfile(@ModelAttribute("account") AccountModel account){
+    @RequestMapping(value = "/user/profile/", method = RequestMethod.GET)
+    public String getUserProfile(@ModelAttribute("account") AccountModel account, Model model){
+        if(account == null || account.getStrID() == null)
+            return "redirect: ../spitter/";
+        account.setListCourse(service.getUserCourseRegister(account));
         return "account/userprofile";
     }
 
-    @RequestMapping(value = "/updateprofile/", method = RequestMethod.POST)
+    @RequestMapping(value = "/user/profile/", method = RequestMethod.POST)
     public String updateProfile(@ModelAttribute("account") AccountModel account, HttpServletRequest request, HttpSession session, SessionStatus status){
         boolean isPWChange = false;
         String strCurrentPass = request.getParameter("strCurrentPass");
@@ -105,14 +105,23 @@ public class AccountController {
             account.setStrPass(strNewPass);
             isPWChange = true;
         }
+        String strbirhtDay = request.getParameter("date") + "/" + request.getParameter("month") + "/" + request.getParameter("year");
+        DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
+        ModelAndView view = new ModelAndView();
+        try {
+            Date date = (Date) df.parse(strbirhtDay);
+            account.setdBirthDay(date);
+        }catch (Exception ex){
+
+        }
         if(service.updateUserProfile(account) == true){
             if(isPWChange){
                 session.removeAttribute("account");
                 status.setComplete();
                 return "redirect: /login/";
             }
-            return "account/userprofile";
+            return "redirect: /user/profile/";
         }
-        return "account/userprofile";
+        return "redirect: /user/profile/";
     }
 }

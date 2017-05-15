@@ -3,6 +3,7 @@ package spitter.web.models;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by nttao on 5/5/2017.
@@ -15,6 +16,16 @@ public class AccountModel {
     private String strEmail;
     private Date dBirthDay;
     private String strGender;
+    private List<CourseRegister> listCourse;
+
+    public List<CourseRegister> getListCourse() {
+        return listCourse;
+    }
+
+    public void setListCourse(List<CourseRegister> listCourse) {
+        this.listCourse = listCourse;
+    }
+
 
     public String getStrGender() { return strGender; }
 
