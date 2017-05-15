@@ -1,16 +1,13 @@
 package spitter.web.controllers;
 
-import com.sun.tracing.dtrace.ModuleAttributes;
-import jdk.nashorn.internal.ir.IfNode;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import spitter.web.models.AccountModel;
-import spitter.web.models.EncrollStatus;
+import spitter.web.models.EnrollStatus;
 import spitter.web.services.AccountService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -89,21 +86,21 @@ public class AccountController {
 
     @RequestMapping(value = "/user/profile/", method = RequestMethod.GET)
     public String getUserProfile(@ModelAttribute("account") AccountModel account, Model model){
-        if(account == null || account.getID() == null)
+        if(account == null || account.getId() == null)
             return "redirect: ../courses";
-        account.setListCourse(service.getUserCourseRegister(account));
-        model.addAttribute("statuses", EncrollStatus.values());
+        account.setEnrollmentList(service.getUserEnrollments(account));
+        model.addAttribute("statuses", EnrollStatus.values());
         return "account/userprofile";
     }
 
     @RequestMapping(value = "/user/profile/", method = RequestMethod.POST)
     public String updateProfile(@ModelAttribute("account") AccountModel account, HttpServletRequest request, HttpSession session, SessionStatus status){
         boolean isPWChange = false;
-        String strCurrentPass = request.getParameter("strCurrentPass");
-        String strNewPass = request.getParameter("strNewPass");
-        String strRetypeNewPass = request.getParameter("strRetypeNewPass");
-        if(strCurrentPass.equals(account.getPass()) && strNewPass.equals(strRetypeNewPass)) {
-            account.setPass(strNewPass);
+        String currentPass = request.getParameter("CurrentPass");
+        String newPass = request.getParameter("NewPass");
+        String retypeNewPass = request.getParameter("RetypeNewPass");
+        if(currentPass.equals(account.getPass()) && newPass.equals(retypeNewPass)) {
+            account.setPass(newPass);
             isPWChange = true;
         }
         String strbirhtDay = request.getParameter("date") + "/" + request.getParameter("month") + "/" + request.getParameter("year");

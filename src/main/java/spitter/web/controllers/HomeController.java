@@ -1,6 +1,5 @@
 package spitter.web.controllers;
 
-import com.sun.tracing.dtrace.ModuleAttributes;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,7 +12,6 @@ import spitter.web.models.Course;
 import spitter.web.services.CourseService;
 
 import java.util.List;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 

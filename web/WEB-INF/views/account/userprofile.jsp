@@ -81,11 +81,11 @@
                 <tbody>
                     <tr>
                         <td style="width: 120px"><label>Name: </label></td>
-                        <td style="width: 380px"><form:input id="txtName" path="Name" disabled="true" ></form:input></td>
+                        <td style="width: 380px"><form:input id="txtName" path="name" disabled="true" ></form:input></td>
                     </tr>
                     <tr>
                         <td style="width: 120px"><label>Email: </label></td>
-                        <td style="width: 380px"><form:input path="Email" disabled="true"></form:input></td>
+                        <td style="width: 380px"><form:input path="email" disabled="true"></form:input></td>
                     </tr>
                     <tr>
                         <td style="width:120px"><label>Birthday:</label></td>
@@ -110,7 +110,7 @@
                     </tr>
                     <tr>
                         <td style="width: 120px"><label>Gender: </label></td>
-                        <td style="width: 380px"><form:radiobuttons  id="rdGender" disabled="true" path="Gender" items="${gender}" /></td>
+                        <td style="width: 380px"><form:radiobuttons  id="rdGender" disabled="true" path="gender" items="${gender}" /></td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -129,11 +129,11 @@
                     <th>Description</th>
                     <th>Status</th>
                 </tr>
-                <c:forEach var="i" begin="1" end="${fn:length(account.listCourse)}">
+                <c:forEach var="item" items="${account.enrollmentList}" varStatus="loop" >
                     <tr>
-                        <td style="border: solid"><form:label path="listCourse[${i-1}].course.title">${account.listCourse[i-1].course.title}</form:label></td>
-                        <td style="border: solid"><form:label path="listCourse[${i-1}].course.description">${account.listCourse[i-1].course.description}</form:label></td>
-                        <td style="border: solid"><form:select path="listCourse[${i-1}].status" items="${statuses}" disabled="true" /></td>
+                        <td style="border: solid"><label>${item.course.title}</label></td>
+                        <td style="border: solid"><label>${item.course.description}</label></td>
+                        <td style="border: solid"><form:select path="enrollmentList[${loop.index}].status" items="${statuses}" disabled="true" /></td>
                     </tr>
                 </c:forEach>
             </table>

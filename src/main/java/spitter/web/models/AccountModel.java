@@ -10,64 +10,64 @@ import java.util.List;
  */
 @Component
 public class AccountModel {
-    private String ID;
-    private String Pass;
-    private String Name;
-    private String Email;
-    private Date BirthDay;
-    private String Gender;
-    private List<Encrollment> listCourse;
 
-    public List<Encrollment> getListCourse() {
-        return listCourse;
+    private String id;
+    private String pass;
+    private String name;
+    private String email;
+    private Date birthDay;
+    private String gender;
+    private List<Enrollment> enrollmentList;
+
+    public String getId() {
+        return id;
     }
 
-    public void setListCourse(List<Encrollment> listCourse) {
-        this.listCourse = listCourse;
+    public void setId(String id) {
+        this.id = id;
     }
 
-
-    public String getGender() { return Gender; }
-
-    public void setGender(String Gender) {  this.Gender = Gender; }
-
-    public String getID() {
-        return ID;
+    public List<Enrollment> getEnrollmentList() {
+        return enrollmentList;
     }
 
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setEnrollmentList(List<Enrollment> enrollmentList) {
+        this.enrollmentList = enrollmentList;
     }
+
+    public String getGender() { return gender; }
+
+    public void setGender(String gender) {  this.gender = gender; }
 
     public String getPass() {
-        return Pass;
+        return pass;
     }
 
-    public void setPass(String Pass) {
-        this.Pass = Pass;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Date getBirthDay() {
-        return BirthDay;
+        return birthDay;
     }
 
-    public void setBirthDay(Date BirthDay) {
-        this.BirthDay = BirthDay;
+    public void setBirthDay(Date birthDay) {
+        this.birthDay = birthDay;
     }
 }

@@ -26,11 +26,11 @@
                         <th>Description</th>
                         <th>Status</th>
                     </tr>
-                    <c:forEach var="i" begin="1" end="${fn:length(account.listCourse)}">
+                    <c:forEach var="item" items="${account.enrollmentList}" varStatus="loop" >
                         <tr>
-                            <td style="border: solid"><form:label path="listCourse[${i-1}].course.title">${account.listCourse[i-1].course.title}</form:label></td>
-                            <td style="border: solid"><form:label path="listCourse[${i-1}].course.description">${account.listCourse[i-1].course.description}</form:label></td>
-                            <td style="border: solid"><form:select path="listCourse[${i-1}].status" items="${statuses}" /></td>
+                            <td style="border: solid"><label>${item.course.title}</label></td>
+                            <td style="border: solid"><label>${item.course.description}</label></td>
+                            <td style="border: solid"><form:select path="enrollmentList[${loop.index}].status" items="${statuses}" /></td>
                         </tr>
                     </c:forEach>
                 </tbody>

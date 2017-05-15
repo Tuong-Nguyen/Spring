@@ -1,27 +1,26 @@
 package spitter.web.models;
 
-import java.util.List;
 
 /**
  * Created by nttao on 5/12/2017.
  */
-public class Encrollment {
+public class Enrollment {
     private int ID;
     private AccountModel user;
     private Course course;
-    private EncrollStatus status;
+    private EnrollStatus status;
 
 
-    public Encrollment(AccountModel ac, Course cour){
-        this.user = ac;
-        this.course = cour;
-        this.status = EncrollStatus.NONE;
+    public Enrollment(AccountModel account, Course course){
+        this.user = account;
+        this.course = course;
+        this.status = EnrollStatus.NONE;
     }
-    public Encrollment(int id, AccountModel ac, Course cour){
+    public Enrollment(int id, AccountModel account, Course course){
         this.ID = id;
-        this.user = ac;
-        this.course = cour;
-        this.status = EncrollStatus.NONE;
+        this.user = account;
+        this.course = course;
+        this.status = EnrollStatus.NONE;
     }
 
 
@@ -33,11 +32,11 @@ public class Encrollment {
         this.ID = ID;
     }
 
-    public EncrollStatus getStatus() {
+    public EnrollStatus getStatus() {
         return status;
     }
 
-    public void setStatus(EncrollStatus status) {
+    public void setStatus(EnrollStatus status) {
         this.status = status;
     }
 

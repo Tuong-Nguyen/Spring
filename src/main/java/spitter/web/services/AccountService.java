@@ -1,21 +1,14 @@
 package spitter.web.services;
 
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import spitter.web.models.AccountModel;
 import spitter.web.models.Course;
-import spitter.web.models.EncrollStatus;
-import spitter.web.models.Encrollment;
+import spitter.web.models.EnrollStatus;
+import spitter.web.models.Enrollment;
 
-import java.io.FileReader;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Created by nttao on 5/5/2017.
@@ -24,29 +17,29 @@ import java.util.Objects;
 @Component
 public class AccountService {
     private List<AccountModel> users;
-    private List<Encrollment> encrollments;
+    private List<Enrollment> encrollments;
     public AccountService(){
         users = new ArrayList<>();
         AccountModel account = new AccountModel();
-        account.setID("qwe");
+        account.setId("qwe");
         account.setPass("qwe");
         account.setName("asd");
         account.setEmail("qwe@qwe.com");
         users.add(account);
-        encrollments = new ArrayList<Encrollment>();
-        encrollments.add(new Encrollment(1,account,new Course(1, "JavaScript", "JavaScript is a programming language used to make web pages interactive. ")));
-        encrollments.add(new Encrollment(2,account, new Course(2, "HTML", "HTML is a computer language devised to allow website creation.")));
-        encrollments.add(new Encrollment(3,account, new Course(3, "JQuery", "JQuery is a programming language used to make web pages interactive")));
-        encrollments.add(new Encrollment(4,account, new Course(4, "CSS", "CSS is a computer language devised to allow website creation.")));
-        encrollments.get(0).setStatus(EncrollStatus.APPROVED);
-        encrollments.get(3).setStatus(EncrollStatus.APPROVED);
+        encrollments = new ArrayList<Enrollment>();
+        encrollments.add(new Enrollment(1,account,new Course(1, "JavaScript", "JavaScript is a programming language used to make web pages interactive. ")));
+        encrollments.add(new Enrollment(2,account, new Course(2, "HTML", "HTML is a computer language devised to allow website creation.")));
+        encrollments.add(new Enrollment(3,account, new Course(3, "JQuery", "JQuery is a programming language used to make web pages interactive")));
+        encrollments.add(new Enrollment(4,account, new Course(4, "CSS", "CSS is a computer language devised to allow website creation.")));
+        encrollments.get(0).setStatus(EnrollStatus.APPROVED);
+        encrollments.get(3).setStatus(EnrollStatus.APPROVED);
     }
 
     public Boolean login(AccountModel account) {
         //readListUserFromFile();
-        if (account.getID() != null && !account.getID().isEmpty()) {
+        if (account.getId() != null && !account.getId().isEmpty()) {
             for (AccountModel user : users) {
-                if (account.getID().equals(user.getID()) && account.getPass().equals(user.getPass())) {
+                if (account.getId().equals(user.getId()) && account.getPass().equals(user.getPass())) {
                     account.setName(user.getName());
                     account.setBirthDay(user.getBirthDay());
                     account.setEmail(user.getEmail());
@@ -60,9 +53,9 @@ public class AccountService {
 
     public Boolean register(AccountModel account) {
         //readListUserFromFile();
-        if (account.getID() != null && !account.getID().isEmpty()) {
+        if (account.getId() != null && !account.getId().isEmpty()) {
             for (AccountModel user : users) {
-                if (account.getID().equals(user.getID())) {
+                if (account.getId().equals(user.getId())) {
                     return false;
                 }
             }
@@ -74,7 +67,7 @@ public class AccountService {
 
     public AccountModel getUserProfile(String id){
         for (AccountModel user : users) {
-            if (user.getID().equals(id)) {
+            if (user.getId().equals(id)) {
                 return user;
             }
         }
@@ -83,7 +76,7 @@ public class AccountService {
 
     public boolean updateUserProfile(AccountModel account){
         for (AccountModel user : users) {
-            if (user.getID().equals(account.getID())) {
+            if (user.getId().equals(account.getId())) {
                 user.setName(account.getName());
                 user.setBirthDay(account.getBirthDay());
                 user.setGender(account.getGender());
@@ -94,42 +87,42 @@ public class AccountService {
         return false;
     }
 
-    public List<Encrollment> getUserCourseRegister(AccountModel user){
-        List<Encrollment> userCourse = new ArrayList<Encrollment>();
-        for (Encrollment cr: encrollments) {
-            if(cr.getUser().getID().equals(user.getID()))
+    public List<Enrollment> getUserEnrollments(AccountModel user){
+        List<Enrollment> enrollments = new ArrayList<Enrollment>();
+        for (Enrollment cr: encrollments) {
+            if(cr.getUser().getId().equals(user.getId()))
             {
-                userCourse.add(cr);
+                enrollments.add(cr);
             }
         }
-        return userCourse;
+        return enrollments;
     }
 
-    public List<Encrollment> getUserCourseIsApprove(AccountModel user){
-        List<Encrollment> userCourse = new ArrayList<Encrollment>();
-        for (Encrollment cr: encrollments) {
-            if(cr.getUser().getID().equals(user.getID())&& (cr.getStatus() == EncrollStatus.APPROVED))
+    public List<Enrollment> getUserAprrovedEnrollments(AccountModel user){
+        List<Enrollment> enrollments = new ArrayList<Enrollment>();
+        for (Enrollment cr: encrollments) {
+            if(cr.getUser().getId().equals(user.getId())&& (cr.getStatus() == EnrollStatus.APPROVED))
             {
-                userCourse.add(cr);
+                enrollments.add(cr);
             }
         }
-        return userCourse;
+        return enrollments;
     }
 
-    public List<Encrollment> getUserCourseWaitApprove(AccountModel user){
-        List<Encrollment> userCourse = new ArrayList<Encrollment>();
-        for (Encrollment cr: encrollments) {
-            if(cr.getUser().getID().equals(user.getID()) && (cr.getStatus() == EncrollStatus.NONE))
+    public List<Enrollment> getPendingEnrollments(AccountModel user){
+        List<Enrollment> enrollments = new ArrayList<Enrollment>();
+        for (Enrollment cr: encrollments) {
+            if(cr.getUser().getId().equals(user.getId()) && (cr.getStatus() == EnrollStatus.NONE))
             {
-                userCourse.add(cr);
+                enrollments.add(cr);
             }
         }
-        return userCourse;
+        return enrollments;
     }
 
-    public boolean saveEncrollStatus(List<Encrollment> list){
-        for (Encrollment item: list) {
-            for (Encrollment temp:encrollments) {
+    public boolean updateEncrollStatus(List<Enrollment> list){
+        for (Enrollment item: list) {
+            for (Enrollment temp:encrollments) {
                 if(temp.getID() == item.getID()){
                     temp.setStatus(item.getStatus());
                 }
