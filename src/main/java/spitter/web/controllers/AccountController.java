@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import spitter.web.models.AccountModel;
-import spitter.web.models.CourseRegister;
+import spitter.web.models.EncrollStatus;
 import spitter.web.services.AccountService;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,7 +75,7 @@ public class AccountController {
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         try {
             Date date = (Date) df.parse(strbirhtDay);
-            account.setdBirthDay(date);
+            account.setBirthDay(date);
             if (service.register(account)) {
                 status.setComplete();
                 return "redirect: /login/";
@@ -89,9 +89,10 @@ public class AccountController {
 
     @RequestMapping(value = "/user/profile/", method = RequestMethod.GET)
     public String getUserProfile(@ModelAttribute("account") AccountModel account, Model model){
-        if(account == null || account.getStrID() == null)
+        if(account == null || account.getID() == null)
             return "redirect: ../spitter/";
         account.setListCourse(service.getUserCourseRegister(account));
+        model.addAttribute("statuses", EncrollStatus.values());
         return "account/userprofile";
     }
 
@@ -101,8 +102,8 @@ public class AccountController {
         String strCurrentPass = request.getParameter("strCurrentPass");
         String strNewPass = request.getParameter("strNewPass");
         String strRetypeNewPass = request.getParameter("strRetypeNewPass");
-        if(strCurrentPass.equals(account.getStrPass()) && strNewPass.equals(strRetypeNewPass)) {
-            account.setStrPass(strNewPass);
+        if(strCurrentPass.equals(account.getPass()) && strNewPass.equals(strRetypeNewPass)) {
+            account.setPass(strNewPass);
             isPWChange = true;
         }
         String strbirhtDay = request.getParameter("date") + "/" + request.getParameter("month") + "/" + request.getParameter("year");
@@ -110,7 +111,7 @@ public class AccountController {
         ModelAndView view = new ModelAndView();
         try {
             Date date = (Date) df.parse(strbirhtDay);
-            account.setdBirthDay(date);
+            account.setBirthDay(date);
         }catch (Exception ex){
 
         }

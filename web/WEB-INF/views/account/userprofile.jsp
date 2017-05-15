@@ -62,15 +62,15 @@
                 <tbody>
                     <tr>
                         <td style="width: 120px"><label>Current pass: </label></td>
-                        <td style="width: 380px"><input id="txtCurrentPass" type="password" name="strCurrentPass" ></input></td>
+                        <td style="width: 380px"><input id="txtCurrentPass" type="password" name="CurrentPass" ></input></td>
                     </tr>
                     <tr>
                         <td style="width: 120px"><label>New pass: </label></td>
-                        <td style="width: 380px"><input id="txtNewPass" type="password" name="strNewPass" ></input></td>
+                        <td style="width: 380px"><input id="txtNewPass" type="password" name="NewPass" ></input></td>
                     </tr>
                     <tr>
                         <td style="width: 120px"><label>Retype new pass: </label></td>
-                        <td style="width: 380px"><input id="txtRetypeNewPass" type="password" name="strRetypeNewPass" ></input></td>
+                        <td style="width: 380px"><input id="txtRetypeNewPass" type="password" name="RetypeNewPass" ></input></td>
                     </tr>
                 </tbody>
             </table>
@@ -81,36 +81,36 @@
                 <tbody>
                     <tr>
                         <td style="width: 120px"><label>Name: </label></td>
-                        <td style="width: 380px"><form:input id="txtName" path="strName" disabled="true" ></form:input></td>
+                        <td style="width: 380px"><form:input id="txtName" path="Name" disabled="true" ></form:input></td>
                     </tr>
                     <tr>
                         <td style="width: 120px"><label>Email: </label></td>
-                        <td style="width: 380px"><form:input path="strEmail" disabled="true"></form:input></td>
+                        <td style="width: 380px"><form:input path="Email" disabled="true"></form:input></td>
                     </tr>
                     <tr>
                         <td style="width:120px"><label>Birthday:</label></td>
                         <td style="width:380px">
                             <table style="border: none; padding:0px; margin: 0px;">
                                 <tr style="width: 100%; padding:0px; margin: 0px;">
-                                    <td style="width: 25%;"><select id="selectDate" disabled style="width: 40px;" type="text" name="date" value="${account.dBirthDay.date}>
+                                    <td style="width: 25%;"><select id="selectDate" disabled style="width: 40px;" type="text" name="date" value="${account.birthDay.date}>
                                         <c:forEach var = "i" begin="1" end="31">
                                             <option value="${i}">${i}</option>
                                         </c:forEach>
                                     </select></td>
-                                    <td style="width: 25%;"><select id="selectMonth" disabled style="width: 40px;" type="text" name="month" value="${account.dBirthDay.month}>
+                                    <td style="width: 25%;"><select id="selectMonth" disabled style="width: 40px;" type="text" name="month" value="${account.birthDay.month}>
                                         <c:forEach var = "i" begin="1" end="12">
                                             <option value="${i}">${i}</option>
                                         </c:forEach>
                                     </select></td>
                                     </select></td>
-                                    <td style="width: 50%;"><input path="${account}" id="selectYear" disabled style="width: 82px;" type="number" name="year" min="1900" max="2017" value="${account.dBirthDay.year}"></td>
+                                    <td style="width: 50%;"><input path="${account}" id="selectYear" disabled style="width: 82px;" type="number" name="year" min="1900" max="2017" value="${account.birthDay.year}"></td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
                     <tr>
                         <td style="width: 120px"><label>Gender: </label></td>
-                        <td style="width: 380px"><form:radiobuttons  id="rdGender" disabled="true" path="strGender" items="${gender}" /></td>
+                        <td style="width: 380px"><form:radiobuttons  id="rdGender" disabled="true" path="Gender" items="${gender}" /></td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -127,13 +127,13 @@
                 <tr>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Approved</th>
+                    <th>Status</th>
                 </tr>
-                <c:forEach var="i" begin="0" end="${fn:length(account.listCourse) -1}">
+                <c:forEach var="i" begin="1" end="${fn:length(account.listCourse)}">
                     <tr>
-                        <td style="border: solid"><form:label path="listCourse[${i}].course.title">${account.listCourse[i].course.title}</form:label></td>
-                        <td style="border: solid"><form:label path="listCourse[${i}].course.description">${account.listCourse[i].course.description}</form:label></td>
-                        <td style="border: solid"><form:checkbox path="listCourse[${i}].approved"  disabled="true" /></td>
+                        <td style="border: solid"><form:label path="listCourse[${i-1}].course.title">${account.listCourse[i-1].course.title}</form:label></td>
+                        <td style="border: solid"><form:label path="listCourse[${i-1}].course.description">${account.listCourse[i-1].course.description}</form:label></td>
+                        <td style="border: solid"><form:select path="listCourse[${i-1}].status" items="${statuses}" disabled="true" /></td>
                     </tr>
                 </c:forEach>
             </table>

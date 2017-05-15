@@ -16,7 +16,7 @@
     <title>Manager Course Request</title>
 </head>
 <body>
-    <form:form action="/course/approve/" method="post" modelAttribute="account">
+    <form:form action="/course/save/" method="post" modelAttribute="account">
         <div>
             <h3> Encroll Course Requests</h3>
             <table>
@@ -24,15 +24,13 @@
                     <tr>
                         <th>Name</th>
                         <th>Description</th>
-                        <th>Approved</th>
-                        <th>Reject</th>
+                        <th>Status</th>
                     </tr>
-                    <c:forEach var="i" begin="0" end="${fn:length(account.listCourse) -1}">
+                    <c:forEach var="i" begin="1" end="${fn:length(account.listCourse)}">
                         <tr>
-                            <td style="border: solid"><form:label path="listCourse[${i}].course.title">${account.listCourse[i].course.title}</form:label></td>
-                            <td style="border: solid"><form:label path="listCourse[${i}].course.description">${account.listCourse[i].course.description}</form:label></td>
-                            <td style="border: solid"><form:checkbox path="listCourse[${i}].approved" /></td>
-                            <td style="border: solid"><button type="button" >Reject</button></td>
+                            <td style="border: solid"><form:label path="listCourse[${i-1}].course.title">${account.listCourse[i-1].course.title}</form:label></td>
+                            <td style="border: solid"><form:label path="listCourse[${i-1}].course.description">${account.listCourse[i-1].course.description}</form:label></td>
+                            <td style="border: solid"><form:select path="listCourse[${i-1}].status" items="${statuses}" /></td>
                         </tr>
                     </c:forEach>
                 </tbody>

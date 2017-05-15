@@ -20,11 +20,11 @@
         <table style="border: none; width: 400px; margin-left: auto; margin-right: auto;">
             <tr>
                 <td style="width:150px"><label>ID:</label></td>
-                <td style="width:250px"><form:input path="strID" type="text"/></td>
+                <td style="width:250px"><form:input path="ID" type="text"/></td>
             </tr>
             <tr>
                 <td style="width:150px"><label>Pass:</label></td>
-                <td style="width:250px"><form:input path="strPass" type="password" /></td>
+                <td style="width:250px"><form:input path="Pass" type="password" /></td>
             </tr>
             <tr>
                 <td style="width:150px"><label>Retype Pass:</label></td>
@@ -32,7 +32,7 @@
             </tr>
             <tr>
                 <td style="width:150px"><label>User Name:</label></td>
-                <td style="width:250px"><form:input path="strName" type="text" /></td>
+                <td style="width:250px"><form:input path="Name" type="text" /></td>
             </tr>
             <tr>
                 <td style="width:150px"><label>Birthday:</label></td>
@@ -57,11 +57,11 @@
             </tr>
             <tr>
                 <td style="width:150px"><label>Email:</label></td>
-                <td style="width:250px"><form:input path="strEmail" type="email" name="strEmail" /></td>
+                <td style="width:250px"><form:input path="Email" type="email" name="Email" /></td>
             </tr>
             <tr>
                 <td style="width:150px"><label>Gender:</label></td>
-                <td style="width:250px"><form:radiobuttons path="strGender" items="${gender}" /></td>
+                <td style="width:250px"><form:radiobuttons path="Gender" items="${gender}" /></td>
             </tr>
             <tr>
                 <td colspan="2">

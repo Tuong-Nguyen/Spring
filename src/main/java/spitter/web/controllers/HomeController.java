@@ -31,7 +31,7 @@ public class HomeController {
         boolean isLogin = false;
         if(session.getAttribute("account") != null){
             account = (AccountModel)session.getAttribute("account");
-            model.addAttribute("user", account.getStrName());
+            model.addAttribute("user", account.getName());
             isLogin = true;
         }
         List<Course> coursesList = courseService.getCourses();
