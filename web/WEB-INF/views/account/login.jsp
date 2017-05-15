@@ -19,11 +19,11 @@
             <table style="border: none; width: 300px; margin-left: auto; margin-right: auto;">
                 <tr>
                     <td style="width:50px"><label>ID:</label></td>
-                    <td style="width:250px"><input type="text" name="strID" /> </td>
+                    <td style="width:250px"><input type="text" name="ID" /> </td>
                 </tr>
                 <tr>
                     <td style="width:50px"><label>Pass:</label></td>
-                    <td style="width:250px"><input type="password" name="strPass" /></td>
+                    <td style="width:250px"><input type="password" name="Pass" /></td>
                 </tr>
                 <tr>
                     <td colspan="2">

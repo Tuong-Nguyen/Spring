@@ -1,59 +1,73 @@
 package spitter.web.models;
 
+import org.springframework.stereotype.Component;
+
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by nttao on 5/5/2017.
  */
+@Component
 public class AccountModel {
-    private String strID;
-    private String strPass;
-    private String strName;
-    private String strEmail;
-    private Date dBirthDay;
-    private String strSex;
+    private String ID;
+    private String Pass;
+    private String Name;
+    private String Email;
+    private Date BirthDay;
+    private String Gender;
+    private List<Encrollment> listCourse;
 
-    public String getStrSex() { return strSex; }
-
-    public void setStrSex(String strSex) {  this.strSex = strSex; }
-
-    public String getStrID() {
-        return strID;
+    public List<Encrollment> getListCourse() {
+        return listCourse;
     }
 
-    public void setStrID(String strID) {
-        this.strID = strID;
+    public void setListCourse(List<Encrollment> listCourse) {
+        this.listCourse = listCourse;
     }
 
-    public String getStrPass() {
-        return strPass;
+
+    public String getGender() { return Gender; }
+
+    public void setGender(String Gender) {  this.Gender = Gender; }
+
+    public String getID() {
+        return ID;
     }
 
-    public void setStrPass(String strPass) {
-        this.strPass = strPass;
+    public void setID(String ID) {
+        this.ID = ID;
     }
 
-    public String getStrName() {
-        return strName;
+    public String getPass() {
+        return Pass;
     }
 
-    public void setStrName(String strName) {
-        this.strName = strName;
+    public void setPass(String Pass) {
+        this.Pass = Pass;
     }
 
-    public String getStrEmail() {
-        return strEmail;
+    public String getName() {
+        return Name;
     }
 
-    public void setStrEmail(String strEmail) {
-        this.strEmail = strEmail;
+    public void setName(String Name) {
+        this.Name = Name;
     }
 
-    public Date getdBirthDay() {
-        return dBirthDay;
+    public String getEmail() {
+        return Email;
     }
 
-    public void setdBirthDay(Date dBirthDay) {
-        this.dBirthDay = dBirthDay;
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public Date getBirthDay() {
+        return BirthDay;
+    }
+
+    public void setBirthDay(Date BirthDay) {
+        this.BirthDay = BirthDay;
     }
 }

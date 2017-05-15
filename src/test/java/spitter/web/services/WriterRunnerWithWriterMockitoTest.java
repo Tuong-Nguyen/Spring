@@ -7,7 +7,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.test.context.ContextConfiguration;
-import spitter.web.controllers.WriterConfig;
+import spitter.config.WriterConfig;
 import spitter.web.services.Interfaces.IWriter;
 
 /**
