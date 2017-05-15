@@ -39,6 +39,6 @@ public class CourseManagementController {
     @RequestMapping(value = "/course/save/", method = RequestMethod.POST)
     public  String approveCourse(@ModelAttribute("account") AccountModel account){
         accountService.saveEncrollStatus(account.getListCourse());
-        return "courseEncrollManager";
+        return "redirect: /course/encrollrequest/";
     }
 }

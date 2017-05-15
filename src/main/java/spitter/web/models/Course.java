@@ -23,6 +23,12 @@ public class Course {
 
    }
 
+    public Course(int id, String title, String description){
+        this.id = id;
+        this.title = title;
+        this.description = description;
+    }
+
    public Course(int id, String title, String description,
                  String startDate, String endDate, int pax, boolean isActive, List<Lesson> lessons ){
        this.id = id;

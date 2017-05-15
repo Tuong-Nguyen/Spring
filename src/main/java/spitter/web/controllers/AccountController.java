@@ -56,7 +56,7 @@ public class AccountController {
     public String login(@ModelAttribute("account") AccountModel account, HttpSession session) {
         if (service.login(account)) {
             session.setAttribute("account", account);
-            return "redirect: /spitter/";
+            return "redirect: /courses";
         } else {
             return "/account/login";
         }
@@ -66,7 +66,7 @@ public class AccountController {
     public String logout(Model model,SessionStatus status, HttpSession session) {
         session.removeAttribute("account");
         status.setComplete();
-        return "redirect:../spitter/";
+        return "redirect:../courses";
     }
 
     @RequestMapping(value = "/register/", method = RequestMethod.POST)
@@ -90,7 +90,7 @@ public class AccountController {
     @RequestMapping(value = "/user/profile/", method = RequestMethod.GET)
     public String getUserProfile(@ModelAttribute("account") AccountModel account, Model model){
         if(account == null || account.getID() == null)
-            return "redirect: ../spitter/";
+            return "redirect: ../courses";
         account.setListCourse(service.getUserCourseRegister(account));
         model.addAttribute("statuses", EncrollStatus.values());
         return "account/userprofile";
