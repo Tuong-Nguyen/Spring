@@ -4,11 +4,8 @@ import com.sun.webkit.Timer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import spitter.web.models.Course;
 import spitter.web.services.CourseService;
@@ -78,5 +75,12 @@ public class HomeController {
     public String store(@ModelAttribute("courseForm") Course cs){
         courseService.addCourse(cs);
         return "redirect:/courses";
+    }
+
+    @RequestMapping(value="/testPut", method = RequestMethod.PUT)
+    @ResponseBody
+    public String put(){
+        System.out.print("Receive a PUT request");
+        return "Test PUT";
     }
 }

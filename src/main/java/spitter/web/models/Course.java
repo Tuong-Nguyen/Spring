@@ -1,6 +1,9 @@
 package spitter.web.models;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -10,10 +13,10 @@ public class Course {
    private int id;
    private String title;
    private String description;
-   //@DateTimeFormat(pattern = "dd/MM/yyyy")
-   private String startDate;
-   //@DateTimeFormat(pattern = "dd/MM/yyyy")
-   private String endDate;
+   @DateTimeFormat(pattern = "dd/MM/yyyy")
+   private Date startDate;
+   @DateTimeFormat(pattern = "dd/MM/yyyy")
+   private Date endDate;
    private int pax;
    private boolean active;
    private List<Lesson> lessons;
@@ -24,7 +27,7 @@ public class Course {
    }
 
    public Course(int id, String title, String description,
-                 String startDate, String endDate, int pax, boolean isActive, List<Lesson> lessons ){
+                 Date startDate, Date endDate, int pax, boolean isActive, List<Lesson> lessons ){
        this.id = id;
        this.title = title;
        this.description = description;
@@ -59,19 +62,19 @@ public class Course {
         this.description = description;
     }
 
-    public void setStartDate(String startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public String getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setEndDate(String endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
-    public String getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 

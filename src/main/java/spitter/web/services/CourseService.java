@@ -18,35 +18,35 @@ public class CourseService {
 
         coursesList = new ArrayList<Course>();
         coursesList.add( new Course(1, "JavaScript_1", "JavaScript is a programming language used to make web pages interactive. ",
-                "01/01/2017","02/01/2017" , 10, true,
+                new Date(), new Date(), 10, true,
                 new ArrayList<Lesson>(){{
                     add(new Lesson(1,"Example A", 20));
                     add(new Lesson(2,"Example B", 20));
                     add(new Lesson(3,"Example C", 20));
                 }}));
         coursesList.add( new Course(2, "JavaScript_2", "JavaScript is a programming language used to make web pages interactive. ",
-                "01/01/2017","02/01/2017", 10, true,
+                new Date(),new Date(), 10, true,
                 new ArrayList<Lesson>(){{
                     add(new Lesson(1,"Example D", 20));
                     add(new Lesson(2,"Example E", 20));
                     add(new Lesson());
                 }}));
         coursesList.add( new Course(3, "JavaScript_3", "JavaScript is a programming language used to make web pages interactive. ",
-                "01/01/2017","02/01/2017", 10, true,
+                new Date(),new Date(), 10, true,
                 new ArrayList<Lesson>(){{
                     add(new Lesson(1,"Example G", 20));
                     add(new Lesson());
                     add(new Lesson());
                 }}));
         coursesList.add( new Course(4, "JavaScript_4", "JavaScript is a programming language used to make web pages interactive. ",
-                "01/01/2017","02/01/2017", 10, true,
+                new Date(),new Date(), 10, true,
                 new ArrayList<Lesson>(){{
                     add(new Lesson());
                     add(new Lesson());
                     add(new Lesson());
                 }}));
         coursesList.add( new Course(5, "JavaScript_5", "JavaScript is a programming language used to make web pages interactive. ",
-                "01/01/2017","02/01/2017", 10, false,
+                new Date(),new Date(), 10, false,
                 new ArrayList<Lesson>(){{
                     add(new Lesson(1,"Example A", 20));
                     add(new Lesson());
