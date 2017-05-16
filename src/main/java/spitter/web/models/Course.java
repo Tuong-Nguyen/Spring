@@ -2,8 +2,10 @@ package spitter.web.models;
 
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
+import spitter.web.services.Converter.VNDateFormat;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -13,14 +15,16 @@ import java.util.List;
  */
 public class Course {
 
-
    private int id;
-   @NotBlank(message = "Required")
    private String title;
+   @NotNull
+   @Size(max=10)
    private String description;
-   @DateTimeFormat(pattern = "dd/MM/yyyy")
+   @VNDateFormat(pattern = "dd/MM/yyyy")
+   //@DateTimeFormat(pattern = "dd/MM/yyyy")
    private Date startDate;
-   @DateTimeFormat(pattern = "dd/MM/yyyy")
+   //@DateTimeFormat(pattern = "dd/MM/yyyy")
+   @VNDateFormat(pattern = "dd/MM/yyyy")
    private Date endDate;
    private int pax;
    private boolean active;

@@ -11,13 +11,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import spitter.web.models.AccountModel;
-import org.springframework.web.bind.annotation.*;
-import spitter.web.models.Course;
-import spitter.web.services.CourseService;
-import java.util.List;
-import spitter.web.validators.CourseValidator;
 import javax.servlet.http.HttpSession;
-import javax.validation.Valid;
+
 
 /**
  * Created by lnthao on 4/28/2017.

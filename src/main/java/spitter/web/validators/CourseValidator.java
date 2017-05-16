@@ -10,8 +10,7 @@ import spitter.web.models.Course;
 public class CourseValidator implements Validator {
     @Override
     public boolean supports(Class<?> aClass) {
-        //return Course.class.equals(aClass);
-        return true;
+        return Course.class.equals(aClass);
     }
 
     @Override
