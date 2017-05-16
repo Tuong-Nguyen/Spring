@@ -9,7 +9,7 @@ import java.util.List;
  * Created by nttao on 5/5/2017.
  */
 @Component
-public class AccountModel {
+public class Account {
 
     private String id;
     private String pass;

@@ -6,17 +6,17 @@ package spitter.web.models;
  */
 public class Enrollment {
     private int ID;
-    private AccountModel user;
+    private Account user;
     private Course course;
     private EnrollStatus status;
 
 
-    public Enrollment(AccountModel account, Course course){
+    public Enrollment(Account account, Course course){
         this.user = account;
         this.course = course;
         this.status = EnrollStatus.NONE;
     }
-    public Enrollment(int id, AccountModel account, Course course){
+    public Enrollment(int id, Account account, Course course){
         this.ID = id;
         this.user = account;
         this.course = course;
@@ -49,11 +49,11 @@ public class Enrollment {
     }
 
 
-    public AccountModel getUser() {
+    public Account getUser() {
         return user;
     }
 
-    public void setUser(AccountModel user) {
+    public void setUser(Account user) {
         this.user = user;
     }
 }

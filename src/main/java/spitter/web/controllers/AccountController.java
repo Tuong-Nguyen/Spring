@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
-import spitter.web.models.AccountModel;
+import spitter.web.models.Account;
 import spitter.web.models.EnrollStatus;
 import spitter.web.services.AccountService;
 
@@ -29,8 +29,8 @@ public class AccountController {
     private AccountService service;
 
     @ModelAttribute("account")
-    public AccountModel getAccount(){
-        return new AccountModel();
+    public Account getAccount(){
+        return new Account();
     }
 
     @ModelAttribute("gender")
@@ -50,7 +50,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/login/", method = RequestMethod.POST)
-    public String login(@ModelAttribute("account") AccountModel account, HttpSession session) {
+    public String login(@ModelAttribute("account") Account account, HttpSession session) {
         if (service.login(account)) {
             session.setAttribute("account", account);
             return "redirect: /courses";
@@ -67,7 +67,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/register/", method = RequestMethod.POST)
-    public String register(@ModelAttribute("account") AccountModel account, HttpServletRequest request, SessionStatus status) {
+    public String register(@ModelAttribute("account") Account account, HttpServletRequest request, SessionStatus status) {
         String strbirhtDay = request.getParameter("date") + "/" + request.getParameter("month") + "/" + request.getParameter("year");
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         try {
@@ -85,7 +85,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/user/profile/", method = RequestMethod.GET)
-    public String getUserProfile(@ModelAttribute("account") AccountModel account, Model model){
+    public String getUserProfile(@ModelAttribute("account") Account account, Model model){
         if(account == null || account.getId() == null)
             return "redirect: ../courses";
         account.setEnrollmentList(service.getUserEnrollments(account));
@@ -94,7 +94,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/user/profile/", method = RequestMethod.POST)
-    public String updateProfile(@ModelAttribute("account") AccountModel account, HttpServletRequest request, HttpSession session, SessionStatus status){
+    public String updateProfile(@ModelAttribute("account") Account account, HttpServletRequest request, HttpSession session, SessionStatus status){
         boolean isPWChange = false;
         String currentPass = request.getParameter("CurrentPass");
         String newPass = request.getParameter("NewPass");

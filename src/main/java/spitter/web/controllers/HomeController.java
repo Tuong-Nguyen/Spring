@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import spitter.web.models.AccountModel;
+import spitter.web.models.Account;
 import spitter.web.models.Course;
 import spitter.web.services.CourseService;
 
@@ -25,10 +25,10 @@ public class HomeController {
     private CourseService courseService;
 
     @RequestMapping(value="", method= RequestMethod.GET)
-    public String index(@ModelAttribute("account") AccountModel account, Model model, HttpSession session){
+    public String index(@ModelAttribute("account") Account account, Model model, HttpSession session){
         boolean isLogin = false;
         if(session.getAttribute("account") != null){
-            account = (AccountModel)session.getAttribute("account");
+            account = (Account)session.getAttribute("account");
             model.addAttribute("user", account.getName());
             isLogin = true;
         }
