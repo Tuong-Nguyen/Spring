@@ -23,11 +23,12 @@
         <tr>
             <td>Title : </td>
             <td><form:input path="title"  /></td>
-            <td><form:errors path="title"/></td>
+            <td><form:errors style="color:red" path="title"/></td>
         </tr>
         <tr>
             <td>Description :</td>
             <td><form:input path="description" /></td>
+            <td><form:errors style="color:red" path="description"/></td>
         </tr>
         <tr>
             <td>Start Date :</td>

@@ -42,9 +42,6 @@ public class VNDateFormatter implements Formatter<Date> {
 
     @Override
     public String print(Date date, Locale locale) {
-//        String[] dateArray = date.toString().split(".");
-//        String printDate = "ngay " + dateArray[0] + " thang " + dateArray[1] + " nam " + dateArray[2];
-//        return printDate;
         if (date == null) {
             return "";
         }

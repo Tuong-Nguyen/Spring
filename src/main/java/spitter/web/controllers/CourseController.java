@@ -3,6 +3,7 @@ package spitter.web.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
@@ -65,21 +66,22 @@ public class CourseController {
     }
 
     @RequestMapping(value="", method = RequestMethod.POST)
-    public String store(@Valid @ModelAttribute("courseForm") Course cs, Errors errors){
-        if(!errors.hasErrors()){
-            System.out.println("validated.");
-        }else{
-            System.out.println("did not validate");
+    public String store(@ModelAttribute("courseForm") @Valid Course cs, BindingResult result){
+        new CourseValidator().validate(cs, result);
+        if (!result.hasErrors()){
+            System.out.println("Validated");
+        } else
+        {
             return "courseAddForm";
         }
         courseService.addCourse(cs);
         return "redirect:/courses";
     }
 
-    @InitBinder
-    public void initBinder(WebDataBinder binder){
-        binder.addValidators(new CourseValidator());
-    }
+//    @InitBinder
+//    public void initBinder(WebDataBinder binder){
+//        binder.addValidators(new CourseValidator());
+//    }
 
     @RequestMapping(value="/testPut", method = RequestMethod.PUT)
     @ResponseBody
