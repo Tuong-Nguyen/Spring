@@ -23,6 +23,7 @@
         <tr>
             <td>Title : </td>
             <td><form:input path="title"  /></td>
+            <td><form:errors path="title"/></td>
         </tr>
         <tr>
             <td>Description :</td>

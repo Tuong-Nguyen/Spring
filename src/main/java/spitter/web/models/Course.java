@@ -1,7 +1,9 @@
 package spitter.web.models;
 
+import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +12,10 @@ import java.util.List;
  * Created by nttao on 5/5/2017.
  */
 public class Course {
+
+
    private int id;
+   @NotBlank(message = "Required")
    private String title;
    private String description;
    @DateTimeFormat(pattern = "dd/MM/yyyy")
