@@ -53,13 +53,14 @@ public class CourseController {
         return "courseEditForm";
     }
 
-    @RequestMapping(value="/{id}/delete", method = RequestMethod.GET)
+    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
+    @ResponseBody
     public String destroy(@PathVariable("id") int id){
         courseService.deleteCourse(id);
-        return "redirect:/courses";
+        return "Delete Course";
     }
 
-    @RequestMapping(value="/update", method = RequestMethod.POST)
+    @RequestMapping(value="/{id}", method = RequestMethod.POST)
     public String update(@ModelAttribute("courseForm") Course cs){
         courseService.updateCourse(cs);
         return "redirect:/courses";
@@ -83,10 +84,4 @@ public class CourseController {
 //        binder.addValidators(new CourseValidator());
 //    }
 
-    @RequestMapping(value="/testPut", method = RequestMethod.PUT)
-    @ResponseBody
-    public String put(){
-        System.out.print("Receive a PUT request");
-        return "Test PUT";
-    }
 }

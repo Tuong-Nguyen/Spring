@@ -26,10 +26,6 @@ public class CourseValidator implements Validator {
             errors.rejectValue("description", "course.description", "The description is required!");
         }
 
-        if(course.getDescription().trim().length() == 0){
-            errors.rejectValue("description", "course.description", "The description is required!");
-        }
-
         if(course.getStartDate().toString().length() == 0){
             errors.rejectValue("startDate", "course.startDate", "The Start Date is required!");
         }

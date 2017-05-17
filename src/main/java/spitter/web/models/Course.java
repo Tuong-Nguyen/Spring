@@ -22,8 +22,8 @@ public class Course {
    //@VNDateFormat(pattern = "dd/MM/yyyy")
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    private Date startDate;
-   @DateTimeFormat(pattern = "dd/MM/yyyy")
    //@VNDateFormat(pattern = "dd/MM/yyyy")
+   @DateTimeFormat(pattern = "dd/MM/yyyy")
    private Date endDate;
    private int pax;
    private boolean active;

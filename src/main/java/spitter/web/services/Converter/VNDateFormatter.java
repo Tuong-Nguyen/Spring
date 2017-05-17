@@ -56,3 +56,4 @@ public class VNDateFormatter implements Formatter<Date> {
         return dateFormat;
     }
 }
+
