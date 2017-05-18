@@ -14,7 +14,7 @@
 </head>
 <body>
     <h1>Edit Course</h1>
-    <form:form method="post" modelAttribute="courseForm" action="/courses/${courseForm.id}">
+    <form:form  method="PUT" modelAttribute="courseForm" action="/courses/${courseForm.id}">
         <table >
             <tr>
                 <td></td>
@@ -23,10 +23,12 @@
             <tr>
                 <td>Title : </td>
                 <td><form:input path="title"  /></td>
+                <td><form:errors style="color:red" path="title"/></td>
             </tr>
             <tr>
                 <td>Description :</td>
                 <td><form:input path="description" /></td>
+                <td><form:errors style="color:red" path="description"/></td>
             </tr>
             <tr>
                 <td>Start Date :</td>

@@ -12,23 +12,6 @@
 <html>
 <head>
     <title>Welcome to Courses</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script>
-        $(document).ready(function(){
-           var deleteLink = $("a:contains('Delete')");
-           $(deleteLink).click(function (event) {
-                $.ajax({
-                    url: $(event.target).attr("href"),
-                    type: "DELETE",
-                    success: function(){
-                        var rowToDelete = $(event.target).closest("tr");
-                        rowToDelete.remove();
-                    }
-                });
-                event.preventDefault();
-           });
-        });
-    </script>
 </head>
 <body>
 <h1>Courses</h1>
@@ -36,14 +19,14 @@
     <tr><th>Title</th><th>Description</th><th>Start Date</th><th>End Date</th><th>Pax</th><th>Active</th><th>Edit</th><th>Delete</th></tr>
     <c:forEach var="item" items="${list}">
         <tr>
-            <td><a href="<spring:url value="/courses/${item.id}/get"/>">${item.title}</a></td>
+            <td><a href="<spring:url value="/courses/${item.id}"/>">${item.title}</a></td>
             <td>${item.description}</td>
             <td>${item.startDate}</td>
             <td>${item.endDate}</td>
             <td>${item.pax}</td>
             <td>${(item.active == true? "Yes": "No")}</td>
             <td><a href="/courses/${item.id}/edit">Edit</a> </td>
-            <td><a href="/courses/${item.id}">Delete</a> </td>
+            <td><a href="/courses/${item.id}/delete">Delete</a> </td>
         </tr>
     </c:forEach>
 </table>

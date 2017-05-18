@@ -1,6 +1,7 @@
 package spitter.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -32,7 +33,7 @@ public class CourseController {
         return "Courses";
     }
 
-    @RequestMapping(value="/{id}/get", method = RequestMethod.GET)
+    @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") int id, Model model){
         Course cs = courseService.getCourseById(id);
         model.addAttribute("courseForm", cs);
@@ -53,35 +54,31 @@ public class CourseController {
         return "courseEditForm";
     }
 
-    @RequestMapping(value="/{id}", method = RequestMethod.DELETE)
-    @ResponseBody
+    @RequestMapping(value="/{id}/delete", method = RequestMethod.GET)
     public String destroy(@PathVariable("id") int id){
         courseService.deleteCourse(id);
-        return "Delete Course";
+        return "redirect:/courses";
     }
 
     @RequestMapping(value="/{id}", method = RequestMethod.POST)
-    public String update(@ModelAttribute("courseForm") Course cs){
+    public String update(@Valid @ModelAttribute("courseForm") Course cs, BindingResult result){
+        new CourseValidator().validate(cs, result);
+        if (result.hasErrors()){
+            return "courseEditForm";
+        }
         courseService.updateCourse(cs);
         return "redirect:/courses";
     }
 
     @RequestMapping(value="", method = RequestMethod.POST)
-    public String store(@ModelAttribute("courseForm") @Valid Course cs, BindingResult result){
+    public String store(@Valid @ModelAttribute("courseForm") Course cs, BindingResult result){
         new CourseValidator().validate(cs, result);
-        if (!result.hasErrors()){
-            System.out.println("Validated");
-        } else
-        {
+        if (result.hasErrors()){
             return "courseAddForm";
         }
         courseService.addCourse(cs);
         return "redirect:/courses";
     }
 
-//    @InitBinder
-//    public void initBinder(WebDataBinder binder){
-//        binder.addValidators(new CourseValidator());
-//    }
 
 }
