@@ -16,14 +16,20 @@
     <spring:url value="../register/" var="urlRegister" />
     <form:form method="post" action="${urlLogin}" modelAttribute="account">
         <div style="align-content: center">
-            <table style="border: none; width: 300px; margin-left: auto; margin-right: auto;">
+            <table style="border: none; width: 700px; margin-left: auto; margin-right: auto;">
                 <tr>
-                    <td style="width:50px"><label>ID:</label></td>
-                    <td style="width:250px"><form:input path="id" type="text" /> </td>
+                    <td style="width:150px"><label>ID:</label></td>
+                    <td style="width:250px"><form:input path="id" type="text"/></td>
                 </tr>
                 <tr>
-                    <td style="width:50px"><label>Pass:</label></td>
+                    <td colspan="2"><form:errors path="id" type="text" cssStyle="color: red"/></td>
+                </tr>
+                <tr>
+                    <td style="width:150px"><label>Pass:</label></td>
                     <td style="width:250px"><form:input path="pass" type="password" /></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><form:errors path="pass" type="text" cssStyle="color: red"/></td>
                 </tr>
                 <tr>
                     <td colspan="2">

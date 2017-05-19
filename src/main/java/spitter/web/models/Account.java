@@ -1,7 +1,10 @@
 package spitter.web.models;
 
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.Size;
 import java.util.Date;
 import java.util.List;
 
@@ -10,12 +13,20 @@ import java.util.List;
  */
 @Component
 public class Account {
-
+    @NotBlank(message = "You must insert your account id!")
+    @Size(min = 5, max = 25)
     private String id;
+    @NotBlank(message = "You must insert your password!")
     private String pass;
+    @NotBlank
+    private String retypePass;
+    @NotBlank(message = "You must insert your name!")
     private String name;
+    @NotBlank(message = "You must insert your email!")
     private String email;
+    @NotBlank(message = "You must insert your birtday!")
     private Date birthDay;
+    @NotBlank(message = "You must select your gender!")
     private String gender;
     private List<Enrollment> enrollmentList;
 
@@ -45,6 +56,14 @@ public class Account {
 
     public void setPass(String pass) {
         this.pass = pass;
+    }
+
+    public String getRetypePass() {
+        return retypePass;
+    }
+
+    public void setRetypePass(String retypePass) {
+        this.retypePass = retypePass;
     }
 
     public String getName() {

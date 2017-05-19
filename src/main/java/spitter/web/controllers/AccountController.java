@@ -3,21 +3,23 @@ package spitter.web.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 import spitter.web.models.Account;
 import spitter.web.models.EnrollStatus;
 import spitter.web.services.AccountService;
+import spitter.web.validators.AccountValidator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.validation.Valid;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by nttao on 5/4/2017.
@@ -27,6 +29,7 @@ import java.util.List;
 public class AccountController {
     @Autowired
     private AccountService service;
+
 
     @ModelAttribute("account")
     public Account getAccount(){
@@ -50,7 +53,7 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/login/", method = RequestMethod.POST)
-    public String login(@ModelAttribute("account") Account account, HttpSession session) {
+    public String login(@Validated @ModelAttribute("account") Account account, BindingResult result, HttpSession session) {
         if (service.login(account)) {
             session.setAttribute("account", account);
             return "redirect: /courses";
@@ -67,7 +70,11 @@ public class AccountController {
     }
 
     @RequestMapping(value = "/register/", method = RequestMethod.POST)
-    public String register(@ModelAttribute("account") Account account, HttpServletRequest request, SessionStatus status) {
+    public String register(@Valid @ModelAttribute("account") Account account, BindingResult result, HttpServletRequest request, SessionStatus status) {
+        //new AccountValidator().validate(account, result); //use with validate annotation
+        if(result.hasErrors()){
+            return "account/register";
+        }
         String strbirhtDay = request.getParameter("date") + "/" + request.getParameter("month") + "/" + request.getParameter("year");
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy");
         try {
@@ -122,4 +129,9 @@ public class AccountController {
         }
         return "redirect: /user/profile/";
     }
+
+//    @InitBinder //Ignore the validation annotation
+//    public void initBinder(WebDataBinder binder){
+//        binder.setValidator(new AccountValidator());
+//    }
 }
