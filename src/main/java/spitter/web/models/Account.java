@@ -3,6 +3,7 @@ package spitter.web.models;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.stereotype.Component;
+import spitter.web.validators.CheckPass;
 
 import javax.validation.constraints.Size;
 import java.util.Date;
@@ -17,6 +18,7 @@ public class Account {
     @Size(min = 5, max = 25)
     private String id;
     @NotBlank(message = "You must insert your password!")
+    @CheckPass(message = "The password must contain numberic character, lowcase character, upcase character, special character, and more then 8 chararcters")
     private String pass;
     @NotBlank
     private String retypePass;
