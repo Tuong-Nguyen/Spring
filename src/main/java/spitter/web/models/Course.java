@@ -8,6 +8,7 @@ import spitter.web.services.Converter.VNDateFormat;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -15,15 +16,14 @@ import java.util.List;
 /**
  * Created by nttao on 5/5/2017.
  */
+@XmlRootElement(name="course")
 public class Course {
    private int id;
    private String title;
    private String description;
-   //@VNDateFormat(pattern = "dd/MM/yyyy")
-   @DateTimeFormat(pattern = "dd/MM/yyyy")
+   @VNDateFormat(pattern = "dd/MM/yyyy")
    private Date startDate;
-   //@VNDateFormat(pattern = "dd/MM/yyyy")
-   @DateTimeFormat(pattern = "dd/MM/yyyy")
+   @VNDateFormat(pattern = "dd/MM/yyyy")
    private Date endDate;
    private int pax;
    private boolean active;
