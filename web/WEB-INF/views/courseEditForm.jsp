@@ -13,6 +13,7 @@
     <title>Edit Course</title>
 </head>
 <body>
+<jsp:include page="../views/fragments/header.jsp"></jsp:include>
     <h1>Edit Course</h1>
     <form:form  method="PUT" modelAttribute="courseForm" action="/courses/${courseForm.id}">
         <table >

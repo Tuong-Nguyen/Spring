@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="../views/fragments/header.jsp"></jsp:include>
 <h1>Resolved by InternalResourceViewResolver</h1>
 </body>
 </html>

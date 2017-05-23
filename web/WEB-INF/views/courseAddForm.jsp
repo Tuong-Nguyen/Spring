@@ -13,6 +13,7 @@
     <title>Add Course</title>
 </head>
 <body>
+<jsp:include page="../views/fragments/header.jsp"></jsp:include>
 <h1>Add Course</h1>
 <form:form method="post" modelAttribute="courseForm" action="/courses">
     <table >
@@ -41,6 +42,7 @@
         <tr>
             <td>Pax :</td>
             <td><form:input path="pax" /></td>
+            <td><form:errors style="color:red" path="pax"/></td>
         </tr>
         <tr>
             <td>Active :</td>

@@ -29,10 +29,6 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
-    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
-    public String welcome(){
-        return "welcome";
-    }
 
     @RequestMapping(value="", method= RequestMethod.GET)
     public String index(Model model){
@@ -61,7 +57,7 @@ public class CourseController {
     @ExceptionHandler(NullPointerException.class)
     @ResponseBody
     public String handleRunTimeError(HttpServletRequest request){
-        return "Run Time Error";
+        return "Null Pointer Error";
     }
     @ExceptionHandler(NullAttributeException.class)
     public String handleError(HttpServletRequest request){

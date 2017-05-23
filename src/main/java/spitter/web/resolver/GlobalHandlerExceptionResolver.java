@@ -1,8 +1,10 @@
 package spitter.web.resolver;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
+import spitter.web.models.HitCounter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Created by nkim on 5/23/2017.
  */
-@Component
+//@Component
 public class GlobalHandlerExceptionResolver implements HandlerExceptionResolver {
 
     @Override

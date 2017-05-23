@@ -1,25 +1,24 @@
 package spitter.config;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
+import org.omg.PortableInterceptor.Interceptor;
+import org.springframework.context.annotation.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
 import org.springframework.oxm.jaxb.Jaxb2Marshaller;
 import org.springframework.web.accept.ContentNegotiationManager;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.servlet.View;
 import org.springframework.web.servlet.ViewResolver;
-import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
-import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.*;
 import org.springframework.web.servlet.view.ContentNegotiatingViewResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.XmlViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
+import spitter.web.interceptors.GlobalInterceptor;
 import spitter.web.models.Course;
+import spitter.web.models.HitCounter;
 import spitter.web.resolver.Jaxb2MarshallingXmlViewResolver;
 import spitter.web.resolver.JsonViewResolver;
 import spitter.web.services.Converter.VNDateFormatAnnotationFormatterFactory;
@@ -35,6 +34,27 @@ import java.util.List;
 @EnableWebMvc
 @ComponentScan("spitter.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
+
+    @Bean
+    public MyRequestContextListener requestContextListener(){
+        return new MyRequestContextListener();
+    }
+
+    @Bean
+    @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public HitCounter hitCounter(){
+        return new HitCounter();
+    }
+    @Bean
+    public GlobalInterceptor globalInterceptor(){
+        return new GlobalInterceptor();
+    }
+
+    @Override
+    public void  addInterceptors(InterceptorRegistry registry){
+        registry.addInterceptor(globalInterceptor()).addPathPatterns("/courses/**");
+    }
+
     @Bean
     public ViewResolver viewResolver() {
         InternalResourceViewResolver resolver =

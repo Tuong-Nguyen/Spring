@@ -11,6 +11,7 @@
     <title>Detail Course</title>
 </head>
 <body>
+<jsp:include page="../views/fragments/header.jsp"></jsp:include>
 <h1>Detail Course</h1>
 <div class="container">
     <div class="row">
