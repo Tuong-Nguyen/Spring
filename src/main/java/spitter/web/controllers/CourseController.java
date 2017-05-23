@@ -1,5 +1,6 @@
 package spitter.web.controllers;
 
+import org.apache.taglibs.standard.tag.common.core.NullAttributeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
@@ -13,6 +14,8 @@ import spitter.web.models.Course;
 import spitter.web.services.CourseService;
 import spitter.web.validators.CourseValidator;
 
+import javax.management.RuntimeErrorException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
@@ -49,7 +52,20 @@ public class CourseController {
     public String create(Model model){
         Course cs = new Course();
         model.addAttribute("courseForm", cs);
+//        if(1==1){
+//            throw new RuntimeException("There was an error");
+//        }
         return "courseAddForm";
+    }
+
+    @ExceptionHandler(NullPointerException.class)
+    @ResponseBody
+    public String handleRunTimeError(HttpServletRequest request){
+        return "Run Time Error";
+    }
+    @ExceptionHandler(NullAttributeException.class)
+    public String handleError(HttpServletRequest request){
+        return "controller_error";
     }
 
     @RequestMapping(value="/{id}/edit", method = RequestMethod.GET)
