@@ -23,7 +23,6 @@ public class GlobalInterceptor extends HandlerInterceptorAdapter {
 
         counter.setHits(counter.getHits() + 1);
         System.out.println("Hits :" + counter.getHits());
-        request.setAttribute("currentDate", new Date());
         return super.preHandle(request, response, handler);
     }
 }

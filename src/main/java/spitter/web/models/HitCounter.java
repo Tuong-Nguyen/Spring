@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 /**
  * Created by nkim on 5/23/2017.
  */
-
 public class HitCounter {
     private int hits;
 
@@ -22,4 +21,5 @@ public class HitCounter {
     public void setHits(int hits){
         this.hits = hits;
     }
+
 }

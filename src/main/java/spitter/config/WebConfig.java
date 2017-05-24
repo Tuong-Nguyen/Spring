@@ -41,7 +41,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 //    }
 
     @Bean
-    @Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    @Scope(value = "application", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public HitCounter hitCounter(){
         return new HitCounter();
     }

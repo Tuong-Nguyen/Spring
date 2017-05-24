@@ -16,6 +16,7 @@
 
 </head>
 <body>
+<jsp:include page="../views/fragments/header.jsp"></jsp:include>
 <c:choose>
     <c:when test="${isLogin == false}">
         <h1>Welcome to Spitter!</h1>

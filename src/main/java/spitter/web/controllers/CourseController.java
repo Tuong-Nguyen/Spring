@@ -37,6 +37,7 @@ public class CourseController {
         return "Courses";
     }
 
+
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
     public String show(@PathVariable("id") int id, Model model){
         Course cs = courseService.getCourseById(id);
@@ -44,11 +45,6 @@ public class CourseController {
         return "detailCourse";
     }
 
-//    @RequestMapping(value="/{id}", method = RequestMethod.GET)
-//    @ResponseBody
-//    public Course show(@PathVariable("id") int id, Model model){
-//        return courseService.getCourseById(id);
-//    }
 
     @RequestMapping(value="/create", method = RequestMethod.GET)
     public String create(Model model){
@@ -60,11 +56,7 @@ public class CourseController {
         return "courseAddForm";
     }
 
-    @ExceptionHandler(NullPointerException.class)
-    @ResponseBody
-    public String handleRunTimeError(HttpServletRequest request){
-        return "Null Pointer Error";
-    }
+
     @ExceptionHandler(NullAttributeException.class)
     public String handleError(HttpServletRequest request){
         return "controller_error";
