@@ -35,16 +35,17 @@ import java.util.List;
 @ComponentScan("spitter.web")
 public class WebConfig extends WebMvcConfigurerAdapter {
 
-    @Bean
-    public MyRequestContextListener requestContextListener(){
-        return new MyRequestContextListener();
-    }
+//    @Bean
+//    public RequestContextListener requestContextListener(){
+//        return new RequestContextListener();
+//    }
 
     @Bean
-    @Scope(value = "session", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    @Scope(value = "prototype", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public HitCounter hitCounter(){
         return new HitCounter();
     }
+
     @Bean
     public GlobalInterceptor globalInterceptor(){
         return new GlobalInterceptor();
