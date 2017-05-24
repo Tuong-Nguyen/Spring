@@ -42,18 +42,28 @@ public class AccountController {
         return gender;
     }
 
+    @ExceptionHandler(NullPointerException.class)
+    public String exceptionControl(){
+        return "exceptions/controllerExceptionHandler";
+    }
+
+//    @ExceptionHandler(Exception.class)
+//    public String exceptionControl1(){
+//        return "exceptions/controllerExceptionHandler";
+//    }
+
     @RequestMapping(value = "/login/", method = RequestMethod.GET)
-    public String LoginPage(Model model) {
+    public String LoginPage() {
         return "account/login";
     }
 
     @RequestMapping(value = "/register/", method = RequestMethod.GET)
-    public String RegisterPage(Model model) {
+    public String RegisterPage() {
         return "account/register";
     }
 
     @RequestMapping(value = "/login/", method = RequestMethod.POST)
-    public String login(@Validated @ModelAttribute("account") Account account, BindingResult result, HttpSession session) {
+    public String login(@ModelAttribute("account") Account account, HttpSession session) {
         if (service.login(account)) {
             session.setAttribute("account", account);
             return "redirect: /courses";
@@ -87,14 +97,15 @@ public class AccountController {
                 return "account/register";
             }
         } catch (Exception ex) {
-            return "account/register";
+            throw new RuntimeException("datetime get error");
+            //return "account/register";
         }
     }
 
     @RequestMapping(value = "/user/profile/", method = RequestMethod.GET)
     public String getUserProfile(@ModelAttribute("account") Account account, Model model){
         if(account == null || account.getId() == null)
-            return "redirect: ../courses";
+            throw new RuntimeException();
         account.setEnrollmentList(service.getUserEnrollments(account));
         model.addAttribute("statuses", EnrollStatus.values());
         return "account/userprofile";
@@ -117,7 +128,7 @@ public class AccountController {
             Date date = (Date) df.parse(strbirhtDay);
             account.setBirthDay(date);
         }catch (Exception ex){
-
+            throw new RuntimeException();
         }
         if(service.updateUserProfile(account) == true){
             if(isPWChange){

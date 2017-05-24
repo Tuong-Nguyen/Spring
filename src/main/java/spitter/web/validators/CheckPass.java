@@ -32,5 +32,4 @@ public @interface CheckPass {
     boolean upcase() default true;
     boolean lowcase() default true;
     boolean specialcharacter() default true;
-
 }
