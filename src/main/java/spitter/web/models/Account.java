@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 import spitter.web.validators.CheckPass;
 
 import javax.validation.constraints.Size;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
 import java.util.List;
 
@@ -13,6 +14,7 @@ import java.util.List;
  * Created by nttao on 5/5/2017.
  */
 @Component
+@XmlRootElement(name = "user")
 public class Account {
     @NotBlank(message = "You must insert your account id!")
     @Size(min = 5, max = 25)

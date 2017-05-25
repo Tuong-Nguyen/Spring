@@ -31,9 +31,7 @@ public class AccountService {
             for (Account user : users) {
                 if (account.getId().equals(user.getId()) && account.getPass().equals(user.getPass())) {
                     account.setName(user.getName());
-                    account.setBirthDay(user.getBirthDay());
-                    account.setEmail(user.getEmail());
-                    account.setGender(user.getGender());
+                    account.setEnrollmentList(getUserEnrollments(account));
                     return true;
                 }
             }

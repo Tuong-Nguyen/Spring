@@ -21,7 +21,7 @@
         <label><a href="<c:url value="/register/" />">Register</a></label>
     </c:when>
     <c:when test="${isLogin == true}">
-        <h1>Welcome <a href="<c:url value="/user/profile/" />">${user}</a></h1>
+        <h1>Welcome <a href="<c:url value="/user/profile/${userId}" />">${userName}</a></h1>
         <h4><a href="<c:url value="/course/encrollrequest/" />">Encroll Request Manager</a></h4>
         <label><a href="<c:url value="/logout/" />">Logout</a></label> |
         <label><a href="<c:url value="/register/" />">Register</a></label>

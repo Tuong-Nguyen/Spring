@@ -102,14 +102,22 @@ public class AccountController {
         }
     }
 
-    @RequestMapping(value = "/user/profile/", method = RequestMethod.GET)
-    public String getUserProfile(@ModelAttribute("account") Account account, Model model){
+    @RequestMapping(value = "/user/profile/{id}", method = RequestMethod.GET)
+    public String getUserProfile(@ModelAttribute("account") Account account, @PathVariable("id") String id, Model model){
+        account = service.getUserProfile(id);
         if(account == null || account.getId() == null)
-            throw new RuntimeException();
-        account.setEnrollmentList(service.getUserEnrollments(account));
+            throw new NullPointerException();
         model.addAttribute("statuses", EnrollStatus.values());
         return "account/userprofile";
     }
+
+//    @RequestMapping(value = "/user/profile/{id}", method = RequestMethod.GET)
+//    public @ResponseBody Account getUserProfile(@ModelAttribute("account") Account account, @PathVariable("id") String id, Model model){
+//        account = service.getUserProfile(id);
+//        if(account == null || account.getId() == null)
+//            throw new RuntimeException();
+//        return account;
+//    }
 
     @RequestMapping(value = "/user/profile/", method = RequestMethod.POST)
     public String updateProfile(@ModelAttribute("account") Account account, HttpServletRequest request, HttpSession session, SessionStatus status){
