@@ -17,6 +17,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.XmlViewResolver;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 import spitter.web.interceptors.GlobalInterceptor;
+import spitter.web.interceptors.TestInterceptor;
 import spitter.web.models.Course;
 import spitter.web.models.HitCounter;
 import spitter.web.resolver.Jaxb2MarshallingXmlViewResolver;
@@ -41,19 +42,28 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 //    }
 
     @Bean
-    @Scope(value = "application", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public HitCounter hitCounter(){
         return new HitCounter();
     }
 
+
     @Bean
+    @Scope(value = "singleton", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public GlobalInterceptor globalInterceptor(){
         return new GlobalInterceptor();
     }
 
+    @Bean
+    @Scope(value = "singleton", proxyMode = ScopedProxyMode.TARGET_CLASS)
+    public TestInterceptor testInterceptor(){
+        return new TestInterceptor();
+    }
+
     @Override
     public void  addInterceptors(InterceptorRegistry registry){
-        registry.addInterceptor(globalInterceptor()).addPathPatterns("/courses/**");
+        registry.addInterceptor( testInterceptor()).addPathPatterns("/courses/**");
+        registry.addInterceptor( globalInterceptor()).addPathPatterns("/courses/**");
     }
 
     @Bean
