@@ -89,6 +89,7 @@ public class CourseController {
             return "courseEditForm";
         }
         courseService.updateCourse(cs);
+        System.out.println(cs);
         return "redirect:/courses";
     }
 
@@ -99,6 +100,7 @@ public class CourseController {
             return "courseAddForm";
         }
         courseService.addCourse(cs);
+        System.out.println(cs);
         return "redirect:/courses";
     }
 

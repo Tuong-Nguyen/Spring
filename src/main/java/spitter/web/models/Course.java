@@ -21,7 +21,7 @@ public class Course {
    private int id;
    private String title;
    private String description;
-   //@VNDateFormat(pattern = "dd/MM/yyyy")\
+   //@VNDateFormat(pattern = "dd/MM/yyyy")
    @DateTimeFormat(pattern = "dd/MM/yyyy")
    private Date startDate;
    //@VNDateFormat(pattern = "dd/MM/yyyy")
@@ -116,5 +116,19 @@ public class Course {
 
     public List<Lesson> getLessons() {
         return lessons;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", startDate=" + startDate +
+                ", endDate=" + endDate +
+                ", pax=" + pax +
+                ", active=" + active +
+                ", lessons=" + lessons +
+                '}';
     }
 }
