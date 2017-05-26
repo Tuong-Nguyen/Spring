@@ -22,6 +22,8 @@ import spitter.web.models.Course;
 import spitter.web.models.HitCounter;
 import spitter.web.resolver.Jaxb2MarshallingXmlViewResolver;
 import spitter.web.resolver.JsonViewResolver;
+import spitter.web.services.Converter.CourseConverter;
+import spitter.web.services.Converter.VNDateConverter;
 import spitter.web.services.Converter.VNDateFormatAnnotationFormatterFactory;
 
 import java.util.ArrayList;
@@ -41,6 +43,15 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 //        return new RequestContextListener();
 //    }
 
+    @Bean
+    public CourseConverter courseConverter(){
+        return new CourseConverter();
+    }
+
+    @Bean
+    public VNDateConverter vnDateConverter(){
+        return new VNDateConverter();
+    }
     @Bean
     @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public HitCounter hitCounter(){
@@ -122,6 +133,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
                 VNDateFormatAnnotationFormatterFactory();
 
         registry.addFormatterForFieldAnnotation(factory);
+        registry.addConverter(vnDateConverter());
+        registry.addConverter(courseConverter());
     }
 
     @Override

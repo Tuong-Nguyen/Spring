@@ -39,8 +39,7 @@ public class CourseController {
 
 
     @RequestMapping(value="/{id}", method = RequestMethod.GET)
-    public String show(@PathVariable("id") int id, Model model){
-        Course cs = courseService.getCourseById(id);
+    public String show(@PathVariable("id") Course cs, Model model){
         model.addAttribute("courseForm", cs);
         return "detailCourse";
     }

@@ -11,6 +11,7 @@
     <title>Title</title>
 </head>
 <body>
+<jsp:include page="../views/fragments/header.jsp"></jsp:include>
 <h2>An error was encountered and handled by a global ExceptionHandlerResolver</h2>
 </body>
 </html>

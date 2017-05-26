@@ -22,10 +22,10 @@ public class Course {
    private String title;
    private String description;
    //@VNDateFormat(pattern = "dd/MM/yyyy")
-   @DateTimeFormat(pattern = "dd/MM/yyyy")
+   //@DateTimeFormat(pattern = "dd/MM/yyyy")
    private Date startDate;
    //@VNDateFormat(pattern = "dd/MM/yyyy")
-   @DateTimeFormat(pattern = "dd/MM/yyyy")
+   //@DateTimeFormat(pattern = "dd/MM/yyyy")
    private Date endDate;
    private int pax;
    private boolean active;

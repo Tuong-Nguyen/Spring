@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 
 /**
- * Created by nkim on 5/24/2017.
+ * Created by nkim on 5/26/2017.
  */
 @ControllerAdvice(annotations=Controller.class)
-public class GlobalControllerAdvice {
-    @ModelAttribute("currentDate")
+public class TestControllerAdvice {
+    @ModelAttribute("testDate")
     public Date getCurrentDate(){
         return new Date();
     }
@@ -22,6 +22,6 @@ public class GlobalControllerAdvice {
     @ExceptionHandler(Exception.class)
     @ResponseBody
     public String handleRunTimeError(HttpServletRequest request){
-        return "Handle by GlobalControllerAdvice";
+        return "Handle by TestControllerAdvice";
     }
 }
