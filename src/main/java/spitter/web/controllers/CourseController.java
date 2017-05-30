@@ -9,6 +9,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import spitter.web.models.AccountModel;
 import spitter.web.models.Course;
 import spitter.web.services.CourseService;
@@ -29,6 +30,16 @@ public class CourseController {
     @Autowired
     private CourseService courseService;
 
+
+    @RequestMapping(value="/upload", method = RequestMethod.POST)
+    public @ResponseBody String handleUpload(@RequestParam("file") MultipartFile file){
+        if(!file.isEmpty()){
+            return "The file size is" + file.getSize();
+        } else
+        {
+            return "There was a problem";
+        }
+    }
 
     @RequestMapping(value="", method= RequestMethod.GET)
     public String index(Model model){

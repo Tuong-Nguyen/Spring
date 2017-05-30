@@ -7,6 +7,7 @@
 --%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -108,5 +109,13 @@
         </tr>
     </table>
 </form:form>
+
+<br>
+<spring:url value="/courses/upload" var="uploadUrl" />
+<form method="post" enctype="multipart/form-data" action="${uploadUrl}">
+    File to upload: <input type="file" name="file"><br>
+    <input type="submit" value="Upload">Press here to upload the file!
+</form>
+
 </body>
 </html>

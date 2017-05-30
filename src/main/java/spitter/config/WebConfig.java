@@ -52,12 +52,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     public VNDateConverter vnDateConverter(){
         return new VNDateConverter();
     }
+
     @Bean
     @Scope(value = "request", proxyMode = ScopedProxyMode.TARGET_CLASS)
     public HitCounter hitCounter(){
         return new HitCounter();
     }
-
 
     @Bean
     @Scope(value = "singleton", proxyMode = ScopedProxyMode.TARGET_CLASS)
