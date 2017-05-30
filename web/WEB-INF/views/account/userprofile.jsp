@@ -31,9 +31,10 @@
         };
         function enableEdit() {
             document.getElementById('txtName').removeAttribute("disabled");
-            document.getElementById("selectDate").removeAttribute("disabled");
-            document.getElementById("selectMonth").removeAttribute("disabled");
-            document.getElementById("selectYear").removeAttribute("disabled");
+            document.getElementById('txtBirthDay').removeAttribute("disabled");
+//            document.getElementById("selectDate").removeAttribute("disabled");
+//            document.getElementById("selectMonth").removeAttribute("disabled");
+//            document.getElementById("selectYear").removeAttribute("disabled");
             document.getElementById("rdGender1").removeAttribute("disabled");
             document.getElementById("rdGender2").removeAttribute("disabled");
             document.getElementById("btnEnableEdit").setAttribute("onclick", "cancelEdit()");
@@ -41,9 +42,10 @@
         };
         function cancelEdit() {
             document.getElementById('txtName').setAttribute("disabled", "true");
-            document.getElementById("selectDate").setAttribute("disabled", "true");
-            document.getElementById("selectMonth").setAttribute("disabled", "true");
-            document.getElementById("selectYear").setAttribute("disabled", "true");
+            document.getElementById('txtBirthDay').setAttribute("disabled", "true");
+//            document.getElementById("selectDate").setAttribute("disabled", "true");
+//            document.getElementById("selectMonth").setAttribute("disabled", "true");
+//            document.getElementById("selectYear").setAttribute("disabled", "true");
             document.getElementById("rdGender1").setAttribute("disabled", "true");
             document.getElementById("rdGender2").setAttribute("disabled", "true");
             document.getElementById("btnEnableEdit").setAttribute("onclick", "enableEdit()");
@@ -89,6 +91,8 @@
                     </tr>
                     <tr>
                         <td style="width:120px"><label>Birthday:</label></td>
+                        <td style="width: 380px"><form:input id="txtBirthDay" path="birthDay" disabled="true"></form:input></td>
+                        <!--
                         <td style="width:380px">
                             <table style="border: none; padding:0px; margin: 0px;">
                                 <tr style="width: 100%; padding:0px; margin: 0px;">
@@ -107,6 +111,7 @@
                                 </tr>
                             </table>
                         </td>
+                        -->
                     </tr>
                     <tr>
                         <td style="width: 120px"><label>Gender: </label></td>
@@ -139,5 +144,8 @@
             </table>
         </div>
     </form:form>
+    <spring:url value="/file/upload/" var="upload" />
+    <input type="file" name="file" />
+    <input type="button" onclick="location.href='${upload}'" value="upload" />
 </body>
 </html>

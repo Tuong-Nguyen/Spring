@@ -28,7 +28,6 @@ public class Account {
     private String name;
     @NotBlank(message = "You must insert your email!")
     private String email;
-    @NotBlank(message = "You must insert your birtday!")
     private Date birthDay;
     @NotBlank(message = "You must select your gender!")
     private String gender;

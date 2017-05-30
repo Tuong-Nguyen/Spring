@@ -12,6 +12,7 @@
 <head>
     <title>Login</title>
 </head>
+<body>
     <spring:url value="../login/" var="urlLogin" />
     <spring:url value="../register/" var="urlRegister" />
     <form:form method="post" action="${urlLogin}" modelAttribute="account">

@@ -1,4 +1,4 @@
-package spitter.web.GlobalExceptions;
+package spitter.web.ExceptionHandler;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
