@@ -1,12 +1,12 @@
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: nttao
-  Date: 5/4/2017
-  Time: 4:39 PM
+  Date: 5/31/2017
+  Time: 11:32 AM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -14,37 +14,37 @@
     <title>Register</title>
 </head>
 <body>
-<spring:url value="../register/" var="urlRegister" />
-<form:form method="post" action="${urlRegister}" modelAttribute="account">
+<spring:url value="/user/register/" var="urlRegister" />
+<form:form method="post" action="${urlRegister}" modelAttribute="user">
     <div style="align-content: center">
         <table style="border: none; width: 700px; margin-left: auto; margin-right: auto;">
             <tr>
                 <td style="width:150px"><label>ID:</label></td>
-                <td style="width:250px"><form:input path="id" type="text"/></td>
+                <td style="width:250px"><form:input path="userId" type="text"/></td>
             </tr>
             <tr>
-                <td colspan="2"><form:errors path="id" type="text" cssStyle="color: red"/></td>
+                <td colspan="2"><form:errors path="userId" type="text" cssStyle="color: red"/></td>
             </tr>
             <tr>
                 <td style="width:150px"><label>Pass:</label></td>
-                <td style="width:250px"><form:input path="pass" type="password" /></td>
+                <td style="width:250px"><form:input path="password" type="password" /></td>
             </tr>
             <tr>
-                <td colspan="2"><form:errors path="pass" type="text" cssStyle="color: red"/></td>
+                <td colspan="2"><form:errors path="password" type="text" cssStyle="color: red"/></td>
             </tr>
             <tr>
                 <td style="width:150px"><label>Retype Pass:</label></td>
-                <td style="width:250px"><form:input  type="password" path="retypePass" /></td>
+                <td style="width:250px"><form:input path="retypePassWord" type="password" /></td>
             </tr>
             <tr>
-                <td colspan="2"><form:errors path="retypePass" type="text" cssStyle="color: red"/></td>
+                <td colspan="2"><form:errors path="retypePassWord" type="text" cssStyle="color: red"/></td>
             </tr>
             <tr>
                 <td style="width:150px"><label>User Name:</label></td>
-                <td style="width:250px"><form:input path="name" type="text" /></td>
+                <td style="width:250px"><form:input path="userName" type="text" /></td>
             </tr>
             <tr>
-                <td colspan="2"><form:errors path="name" type="text" cssStyle="color: red"/></td>
+                <td colspan="2"><form:errors path="userName" type="text" cssStyle="color: red"/></td>
             </tr>
             <tr>
                 <td style="width:150px"><label>Birthday:</label></td>
@@ -68,7 +68,7 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2"><form:errors path="birthDay" type="text" cssStyle="color: red"/></td>
+                <td colspan="2"><form:errors path="birthday" type="text" cssStyle="color: red"/></td>
             </tr>
             <tr>
                 <td style="width:150px"><label>Email:</label></td>

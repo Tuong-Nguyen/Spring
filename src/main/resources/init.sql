@@ -1,0 +1,1 @@
+insert into USER(ID, PASS, NAME, EMAIL, GENDER, BIRTHDAY) values ('qwe', 'qwe', 'asd', 'qwe@qwe.com', 'male', '1986-5-5')

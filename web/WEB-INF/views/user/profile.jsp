@@ -1,6 +1,6 @@
 <%@ page import="java.util.Calendar" %>
 <%@ page import="org.springframework.web.bind.annotation.ModelAttribute" %>
-<%@ page import="spitter.web.models.Account" %><%--
+<%@ page import="spitter.web.models.User.User" %><%--
   Created by IntelliJ IDEA.
   User: nttao
   Date: 5/10/2017
@@ -18,17 +18,6 @@
     <style type="text/css">
     </style>
     <script type="text/javascript">
-        function getDayofMonth(year, month) {
-            if(month == 4 || month == 6 || month == 9 || month == 11){
-                return 30;
-            }
-            if(month == 2){
-                if(year % 4 == 0)
-                    return 29;
-                return 28;
-            }
-            return 31;
-        };
         function enableEdit() {
             document.getElementById('txtName').removeAttribute("disabled");
             document.getElementById('txtBirthDay').removeAttribute("disabled");
@@ -55,7 +44,7 @@
     </script>
 </head>
 <body>
-    <form:form action="/user/profile/" method="post" modelAttribute="account">
+    <form:form action="/user/profile/" method="post" modelAttribute="user">
         <div style="align-content: center">
             <table style="width: 510px">
                 <thead>
@@ -83,7 +72,7 @@
                 <tbody>
                     <tr>
                         <td style="width: 120px"><label>Name: </label></td>
-                        <td style="width: 380px"><form:input id="txtName" path="name" disabled="true" ></form:input></td>
+                        <td style="width: 380px"><form:input id="txtName" path="userName" disabled="true" ></form:input></td>
                     </tr>
                     <tr>
                         <td style="width: 120px"><label>Email: </label></td>
@@ -91,27 +80,7 @@
                     </tr>
                     <tr>
                         <td style="width:120px"><label>Birthday:</label></td>
-                        <td style="width: 380px"><form:input id="txtBirthDay" path="birthDay" disabled="true"></form:input></td>
-                        <!--
-                        <td style="width:380px">
-                            <table style="border: none; padding:0px; margin: 0px;">
-                                <tr style="width: 100%; padding:0px; margin: 0px;">
-                                    <td style="width: 25%;"><select id="selectDate" disabled style="width: 40px;" type="text" name="date" value="${account.birthDay.date}>
-                                        <c:forEach var = "i" begin="1" end="31">
-                                            <option value="${i}">${i}</option>
-                                        </c:forEach>
-                                    </select></td>
-                                    <td style="width: 25%;"><select id="selectMonth" disabled style="width: 40px;" type="text" name="month" value="${account.birthDay.month}>
-                                        <c:forEach var = "i" begin="1" end="12">
-                                            <option value="${i}">${i}</option>
-                                        </c:forEach>
-                                    </select></td>
-                                    </select></td>
-                                    <td style="width: 50%;"><input path="${account}" id="selectYear" disabled style="width: 82px;" type="number" name="year" min="1900" max="2017" value="${account.birthDay.year}"></td>
-                                </tr>
-                            </table>
-                        </td>
-                        -->
+                        <td style="width: 380px"><form:input id="txtBirthDay" path="birthday" disabled="true"></form:input></td>
                     </tr>
                     <tr>
                         <td style="width: 120px"><label>Gender: </label></td>
@@ -126,26 +95,23 @@
                 </tfoot>
             </table>
         </div>
-        <div>
-            <h3> My Course</h3>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Status</th>
-                </tr>
-                <c:forEach var="item" items="${account.enrollmentList}" varStatus="loop" >
-                    <tr>
-                        <td style="border: solid"><label>${item.course.title}</label></td>
-                        <td style="border: solid"><label>${item.course.description}</label></td>
-                        <td style="border: solid"><form:select path="enrollmentList[${loop.index}].status" items="${statuses}" disabled="true" /></td>
-                    </tr>
-                </c:forEach>
-            </table>
-        </div>
+        <%--<div>--%>
+            <%--<h3> My Course</h3>--%>
+            <%--<table>--%>
+                <%--<tr>--%>
+                    <%--<th>Name</th>--%>
+                    <%--<th>Description</th>--%>
+                    <%--<th>Status</th>--%>
+                <%--</tr>--%>
+                <%--<c:forEach var="item" items="${account.enrollmentList}" varStatus="loop" >--%>
+                    <%--<tr>--%>
+                        <%--<td style="border: solid"><label>${item.course.title}</label></td>--%>
+                        <%--<td style="border: solid"><label>${item.course.description}</label></td>--%>
+                        <%--<td style="border: solid"><form:select path="enrollmentList[${loop.index}].status" items="${statuses}" disabled="true" /></td>--%>
+                    <%--</tr>--%>
+                <%--</c:forEach>--%>
+            <%--</table>--%>
+        <%--</div>--%>
     </form:form>
-    <spring:url value="/file/upload/" var="upload" />
-    <input type="file" name="file" />
-    <input type="button" onclick="location.href='${upload}'" value="upload" />
 </body>
 </html>

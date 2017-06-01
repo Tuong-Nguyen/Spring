@@ -1,12 +1,18 @@
 package spitter.config;
 
 import org.springframework.context.annotation.*;
-import org.springframework.context.support.ConversionServiceFactoryBean;
-import org.springframework.core.convert.ConversionService;
-import org.springframework.core.convert.converter.Converter;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.data.web.config.SpringDataWebConfiguration;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.http.MediaType;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.orm.jpa.JpaTransactionManager;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.accept.ContentNegotiationManager;
 import org.springframework.web.multipart.support.StandardServletMultipartResolver;
 import org.springframework.web.servlet.ViewResolver;
@@ -16,9 +22,10 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.XmlViewResolver;
 import spitter.web.InterceptorHandler.GlobalInterceptor;
 import spitter.web.converters.DateTimeConverter;
-import sun.font.StandardGlyphVector;
 
+import javax.persistence.EntityManagerFactory;
 import javax.servlet.annotation.MultipartConfig;
+import javax.sql.DataSource;
 import java.util.*;
 
 /**
@@ -28,6 +35,7 @@ import java.util.*;
 @EnableWebMvc
 @MultipartConfig
 @ComponentScan("spitter.web")
+@Import(DataConfiguration.class)
 public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     public ViewResolver viewResolver() {
@@ -63,16 +71,11 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         return resolver;
     }
 
-//    @Bean
-//    public ConversionService conversionService(){
-//        ConversionServiceFactoryBean bean = new ConversionServiceFactoryBean();
-//        Set<Converter> converters = new HashSet<Converter>();
-//        converters.add(new DateTimeConverter());
-//        bean.setConverters(converters);
-//        bean.afterPropertiesSet();
-//        ConversionService service = bean.getObject();
-//        return service;
-//    }
+    @Bean
+    public SpringDataWebConfiguration springDataWebConfiguration()
+    {
+        return new SpringDataWebConfiguration();
+    }
 
     @Bean
     public StandardServletMultipartResolver standardServletMultipartResolver(){
@@ -102,7 +105,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(globalInterceptor()).addPathPatterns("/user/**");
+        //registry.addInterceptor(globalInterceptor()).addPathPatterns("/user/**");
     }
 
     @Override

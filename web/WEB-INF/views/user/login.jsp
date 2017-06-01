@@ -13,24 +13,24 @@
     <title>Login</title>
 </head>
 <body>
-    <spring:url value="../login/" var="urlLogin" />
-    <spring:url value="../register/" var="urlRegister" />
-    <form:form method="post" action="${urlLogin}" modelAttribute="account">
+    <spring:url value="/user/login/" var="urlLogin" />
+    <spring:url value="/user/register/" var="urlRegister" />
+    <form:form method="post" action="${urlLogin}" modelAttribute="user">
         <div style="align-content: center">
             <table style="border: none; width: 700px; margin-left: auto; margin-right: auto;">
                 <tr>
                     <td style="width:150px"><label>ID:</label></td>
-                    <td style="width:250px"><form:input path="id" type="text"/></td>
+                    <td style="width:250px"><form:input path="userId" type="text"/></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><form:errors path="id" type="text" cssStyle="color: red"/></td>
+                    <td colspan="2"><form:errors path="userId" type="text" cssStyle="color: red"/></td>
                 </tr>
                 <tr>
                     <td style="width:150px"><label>Pass:</label></td>
-                    <td style="width:250px"><form:input path="pass" type="password" /></td>
+                    <td style="width:250px"><form:input path="password" type="password" /></td>
                 </tr>
                 <tr>
-                    <td colspan="2"><form:errors path="pass" type="text" cssStyle="color: red"/></td>
+                    <td colspan="2"><form:errors path="password" type="text" cssStyle="color: red"/></td>
                 </tr>
                 <tr>
                     <td colspan="2">

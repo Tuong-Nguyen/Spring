@@ -1,6 +1,6 @@
 <%@ page import="java.util.Calendar" %>
 <%@ page import="org.springframework.web.bind.annotation.ModelAttribute" %>
-<%@ page import="spitter.web.models.Account" %><%--
+<%@ page import="spitter.web.models.User.User" %><%--
   Created by IntelliJ IDEA.
   User: nttao
   Date: 5/10/2017

@@ -1,24 +1,26 @@
 package spitter.web.models;
 
 
+import spitter.web.models.User.User;
+
 /**
  * Created by nttao on 5/12/2017.
  */
 public class Enrollment {
     private int ID;
-    private Account user;
+    private User user;
     private Course course;
     private EnrollStatus status;
 
 
-    public Enrollment(Account account, Course course){
-        this.user = account;
+    public Enrollment(User user, Course course){
+        this.user = user;
         this.course = course;
         this.status = EnrollStatus.NONE;
     }
-    public Enrollment(int id, Account account, Course course){
+    public Enrollment(int id, User user, Course course){
         this.ID = id;
-        this.user = account;
+        this.user = user;
         this.course = course;
         this.status = EnrollStatus.NONE;
     }
@@ -49,11 +51,11 @@ public class Enrollment {
     }
 
 
-    public Account getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(Account user) {
+    public void setUser(User user) {
         this.user = user;
     }
 }

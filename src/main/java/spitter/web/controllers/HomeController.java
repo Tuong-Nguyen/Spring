@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import spitter.web.models.Account;
 import spitter.web.models.Course;
+import spitter.web.models.User.User;
 import spitter.web.services.CourseService;
 
 import java.util.List;
@@ -25,12 +25,12 @@ public class HomeController {
     private CourseService courseService;
 
     @RequestMapping(value="", method= RequestMethod.GET)
-    public String index(@ModelAttribute("account") Account account, Model model, HttpSession session){
+    public String index(@ModelAttribute("account") User user, Model model, HttpSession session){
         boolean isLogin = false;
-        if(session.getAttribute("account") != null){
-            account = (Account)session.getAttribute("account");
-            model.addAttribute("userName", account.getName());
-            model.addAttribute("userId", account.getId());
+        if(session.getAttribute("user") != null){
+            user = (User)session.getAttribute("user");
+            model.addAttribute("userName", user.getUserName());
+            model.addAttribute("userId", user.getUserId());
             isLogin = true;
         }
         List<Course> coursesList = courseService.getCourses();
