@@ -20,9 +20,9 @@ import java.util.Properties;
  * Created by nttao on 5/30/2017.
  */
 @Configuration
-@EnableJpaRepositories("spitter.web.models")
+@EnableJpaRepositories("spitter.web")
 @EnableTransactionManagement
-@ComponentScan("spitter.web.models")
+@ComponentScan("spitter.web")
 public class DataConfiguration {
     @Bean
     public DataSource dataSource(){

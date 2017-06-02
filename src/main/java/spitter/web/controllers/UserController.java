@@ -4,10 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 import spitter.web.models.User.User;
 import spitter.web.services.User.UserService;
 
@@ -26,6 +24,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping("/user")
+@SessionAttributes("user")
 public class UserController {
     @Autowired
     private UserService userService;
@@ -47,21 +46,24 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login/", method = RequestMethod.POST)
-    public String login(@ModelAttribute("user") User user, HttpSession session) {
+    public String login(@ModelAttribute("user") User user, HttpSession session, SessionStatus status) {
         if (userService.login(user)) {
             session.setAttribute("user", user);
             return "redirect: /courses";
         } else {
+            status.setComplete();
             return "/user/login/";
         }
     }
 
     @RequestMapping(value = "/logout/", method = RequestMethod.GET)
-    public String logout(HttpSession session) {
+    public String logout(HttpSession session, SessionStatus status) {
         if(session.getAttribute("user") != null) {
             session.removeAttribute("user");
-            return "/user/login/";
+            status.setComplete();
+            return "redirect: /user/login/";
         }
+        status.setComplete();
         return "redirect: /courses";
     }
 
@@ -74,7 +76,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "/register/", method = RequestMethod.POST)
-    public String register(@Valid @ModelAttribute("user") User user, BindingResult result, HttpServletRequest request) {
+    public String register(@Valid @ModelAttribute("user") User user, BindingResult result, HttpServletRequest request, SessionStatus status) {
         if(result.hasErrors()){
             return "account/register";
         }
@@ -83,8 +85,10 @@ public class UserController {
         try {
             Date date = (Date) df.parse(strbirhtDay);
             if (userService.save(user) != null) {
+                status.setComplete();
                 return "redirect: /login/";
             } else {
+                status.setComplete();
                 return "user/register";
             }
         } catch (Exception ex) {
@@ -96,7 +100,15 @@ public class UserController {
     @RequestMapping(value = "/profile/", method = RequestMethod.GET)
     public String userProfile(Model model, @RequestParam("id") String id){
         User user = userService.findOne(id);
+        User temp = userService.finfByEmail(user.getEmail());
         model.addAttribute("user", user);
+        return "/user/profile";
+    }
+
+    @RequestMapping(value = "/profile/", method = RequestMethod.POST)
+    public String userProfile(@ModelAttribute User user, SessionStatus status){
+        userService.updateUserProfile(user);
+        status.setComplete();
         return "/user/profile";
     }
 }

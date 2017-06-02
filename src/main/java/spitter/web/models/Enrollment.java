@@ -3,28 +3,24 @@ package spitter.web.models;
 
 import spitter.web.models.User.User;
 
+import javax.persistence.*;
+
 /**
  * Created by nttao on 5/12/2017.
  */
+//@Entity
+//@Table(name = "Enrolment")
 public class Enrollment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID")
     private int ID;
-    private User user;
-    private Course course;
+    @Column(name = "USERID")
+    private String userID;
+    @Column(name = "COURSEID")
+    private int courseID;
+    @Column(name = "STATUS")
     private EnrollStatus status;
-
-
-    public Enrollment(User user, Course course){
-        this.user = user;
-        this.course = course;
-        this.status = EnrollStatus.NONE;
-    }
-    public Enrollment(int id, User user, Course course){
-        this.ID = id;
-        this.user = user;
-        this.course = course;
-        this.status = EnrollStatus.NONE;
-    }
-
 
     public int getID() {
         return ID;
@@ -34,28 +30,27 @@ public class Enrollment {
         this.ID = ID;
     }
 
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
+
+    public int getCourseID() {
+        return courseID;
+    }
+
+    public void setCourseID(int courseID) {
+        this.courseID = courseID;
+    }
+
     public EnrollStatus getStatus() {
         return status;
     }
 
     public void setStatus(EnrollStatus status) {
         this.status = status;
-    }
-
-    public Course getCourse() {
-        return course;
-    }
-
-    public void setCourse(Course course) {
-        this.course = course;
-    }
-
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }

@@ -2,14 +2,15 @@ package spitter.web.models.User;
 
 import org.hibernate.annotations.Check;
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
+import spitter.web.models.Enrollment;
 import spitter.web.validators.CheckPass;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by nttao on 5/30/2017.
@@ -20,11 +21,11 @@ public class User {
     @Id
     @Column(name = "ID")
     @NotBlank
-    @Size(min = 5, max = 25)
+    //@Size(min = 5, max = 25)
     private String userId;
     @Column(name = "PASS")
     @NotBlank
-    @CheckPass
+    //@CheckPass
     private  String password;
 
     private String retypePassWord;
@@ -38,8 +39,11 @@ public class User {
     @NotBlank
     private String gender;
     @Column(name = "BIRTHDAY")
-    @NotBlank
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-ddd")
     private Date birthday;
+    //@OneToMany(cascade = CascadeType.ALL)
+    private List<Enrollment> enrollments;
 
     public String getUserId() {
         return userId;

@@ -35,4 +35,14 @@ public class UserService {
         }
         return false;
     }
+
+    public User finfByEmail(String email){
+        return reponsitory.findByEmail(email);
+    }
+    public User updateUserProfile(User user){
+        return save(user);
+//        int rs =  reponsitory.update(user.getUserId(), user.getUserName(), user.getPassword(),
+//                user.getEmail(), user.getGender(), user.getBirthday());
+//        return user;
+    }
 }

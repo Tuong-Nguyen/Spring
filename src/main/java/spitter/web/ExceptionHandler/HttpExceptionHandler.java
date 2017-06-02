@@ -5,7 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.Controller;
-import spitter.web.models.Account;
 import spitter.web.models.EnrollStatus;
 import sun.util.locale.provider.DateFormatSymbolsProviderImpl;
 
@@ -24,9 +23,9 @@ public class HttpExceptionHandler {
 //        return view;
 //    }
 
-    @ExceptionHandler(Exception.class)
-    public String exceptionControl1(){
-        System.out.println("runtime exception handler");
-        return "exceptions/controllerExceptionHandler";
-    }
+//    @ExceptionHandler(Exception.class)
+//    public String exceptionControl1(){
+//        System.out.println("runtime exception handler");
+//        return "exceptions/controllerExceptionHandler";
+//    }
 }

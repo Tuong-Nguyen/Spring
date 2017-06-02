@@ -110,6 +110,6 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
     @Override
     public void addFormatters(FormatterRegistry registry) {
-        registry.addConverter(new DateTimeConverter());
+        //registry.addConverter(new DateTimeConverter());
     }
 }

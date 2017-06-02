@@ -21,9 +21,6 @@
         function enableEdit() {
             document.getElementById('txtName').removeAttribute("disabled");
             document.getElementById('txtBirthDay').removeAttribute("disabled");
-//            document.getElementById("selectDate").removeAttribute("disabled");
-//            document.getElementById("selectMonth").removeAttribute("disabled");
-//            document.getElementById("selectYear").removeAttribute("disabled");
             document.getElementById("rdGender1").removeAttribute("disabled");
             document.getElementById("rdGender2").removeAttribute("disabled");
             document.getElementById("btnEnableEdit").setAttribute("onclick", "cancelEdit()");
@@ -32,9 +29,6 @@
         function cancelEdit() {
             document.getElementById('txtName').setAttribute("disabled", "true");
             document.getElementById('txtBirthDay').setAttribute("disabled", "true");
-//            document.getElementById("selectDate").setAttribute("disabled", "true");
-//            document.getElementById("selectMonth").setAttribute("disabled", "true");
-//            document.getElementById("selectYear").setAttribute("disabled", "true");
             document.getElementById("rdGender1").setAttribute("disabled", "true");
             document.getElementById("rdGender2").setAttribute("disabled", "true");
             document.getElementById("btnEnableEdit").setAttribute("onclick", "enableEdit()");
