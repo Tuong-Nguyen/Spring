@@ -24,11 +24,11 @@
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <setting name="provider-name" value="" />
+        <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="entityManagerFactory" />
+          <factory-entry name="entityManagerFactory" value="1aafd3d2-0ae0-437d-a7ba-5e7929a35303" />
+          <factory-entry name="entityManagerFactoryTest" value="65b9234d-5285-4405-9c9c-666fc65016bc" />
         </datasource-mapping>
-        <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/META-INF/persistence.xml" />
       </configuration>
     </facet>
   </component>

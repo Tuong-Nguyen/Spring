@@ -1,6 +1,5 @@
 package spitter.config;
 
-import org.h2.jdbcx.JdbcDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -18,26 +17,23 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
- * Created by nttao on 5/30/2017.
+ * Created by nttao on 6/7/2017.
  */
 @Configuration
-@EnableJpaRepositories("spitter.web")
+@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactoryTest", basePackages = "spitter.web")
 @EnableTransactionManagement
 @ComponentScan("spitter.web")
-public class DataConfiguration {
+public class DataConfigurationTest {
     @Bean
-    public DataSource dataSource(){
-        JdbcDataSource dataSource = new JdbcDataSource();
-        dataSource.setURL("jdbc:h2:file:D:/workspace/demoJPA");
-        dataSource.setUser("sa");
-        dataSource.setPassword("");
-        return dataSource;
-        //EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
-        //return builder.setType(EmbeddedDatabaseType.H2).build();
+    public DataSource dataSourceTest(){
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        return builder.setType(EmbeddedDatabaseType.H2)
+                .addScript("createDatabse.sql")
+                .addScript("insertUser.sql")
+                .build();
     }
-
     @Bean
-    public EntityManagerFactory entityManagerFactory(){
+    public EntityManagerFactory entityManagerFactoryTest(){
         HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(true);
 
@@ -46,19 +42,19 @@ public class DataConfiguration {
         jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
         jpaProperties.put("hibernate.hbm2ddl.import_files", "init.sql");
 
-        LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
-        factory.setDataSource(dataSource());
-        factory.setPackagesToScan("spitter.web.models");
-        factory.setJpaProperties(jpaProperties);
-        factory.setJpaVendorAdapter(vendorAdapter);
-        factory.afterPropertiesSet();
-        return factory.getObject();
+        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+        factoryBean.setDataSource(dataSourceTest());
+        factoryBean.setJpaVendorAdapter(vendorAdapter);
+        //use hibernate generate database or database form datasource script file.
+        //factoryBean.setJpaProperties(jpaProperties);
+        factoryBean.setPackagesToScan("spitter.web.models");
+        factoryBean.afterPropertiesSet();
+        return factoryBean.getObject();
     }
-
     @Bean
     public PlatformTransactionManager transactionManager(){
-        JpaTransactionManager  transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory(entityManagerFactory());
+        JpaTransactionManager transactionManager = new JpaTransactionManager();
+        transactionManager.setEntityManagerFactory(entityManagerFactoryTest());
         return transactionManager;
     }
 }

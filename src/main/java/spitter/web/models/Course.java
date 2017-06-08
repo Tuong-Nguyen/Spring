@@ -1,27 +1,33 @@
 package spitter.web.models;
 
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by nttao on 5/5/2017.
  */
+@Entity
+@Table( name = "COURSE")
 public class Course {
-   private int id;
-   private String title;
-   private String description;
-   //@DateTimeFormat(pattern = "dd/MM/yyyy")
-   private String startDate;
-   //@DateTimeFormat(pattern = "dd/MM/yyyy")
-   private String endDate;
-   private int pax;
-   private boolean active;
-   private List<Lesson> lessons;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private String title;
+    private String description;
+    //@DateTimeFormat(pattern = "dd/MM/yyyy")
+    private String startDate;
+    //@DateTimeFormat(pattern = "dd/MM/yyyy")
+    private String endDate;
+    private int pax;
+    private boolean active;
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Lesson> lessons;
 
 
-   public Course(){
+    public Course(){
 
-   }
+    }
 
     public Course(int id, String title, String description){
         this.id = id;
@@ -29,7 +35,7 @@ public class Course {
         this.description = description;
     }
 
-   public Course(int id, String title, String description,
+    public Course(int id, String title, String description,
                  String startDate, String endDate, int pax, boolean isActive, List<Lesson> lessons ){
        this.id = id;
        this.title = title;
@@ -39,7 +45,7 @@ public class Course {
        this.pax = pax;
        this.active = isActive;
        this.lessons = lessons;
-   }
+    }
 
     public int getId() {
         return id;

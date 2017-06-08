@@ -2,10 +2,12 @@ package spitter.web.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
+import spitter.web.models.Enrollment;
 import spitter.web.models.User.User;
 import spitter.web.services.User.UserService;
 
@@ -25,6 +27,7 @@ import java.util.List;
 @Controller
 @RequestMapping("/user")
 @SessionAttributes("user")
+@Transactional
 public class UserController {
     @Autowired
     private UserService userService;
@@ -100,7 +103,6 @@ public class UserController {
     @RequestMapping(value = "/profile/", method = RequestMethod.GET)
     public String userProfile(Model model, @RequestParam("id") String id){
         User user = userService.findOne(id);
-        User temp = userService.finfByEmail(user.getEmail());
         model.addAttribute("user", user);
         return "/user/profile";
     }
